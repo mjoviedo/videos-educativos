@@ -741,6 +741,8 @@ export interface ScriptExample {
   clarification: string;
   fullText: string;
   externalLink?: string;
+  docId: string;
+  docUrl: string;
 }
 
 export const SCRIPT_EXAMPLES: ScriptExample[] = [
@@ -750,6 +752,8 @@ export const SCRIPT_EXAMPLES: ScriptExample[] = [
     badge: 'Destacado',
     isFeatured: true,
     clarification: 'Estructura base recomendada a dos columnas (Texto / Imagen). Define objetivos, destinatarios, medio de publicación e integra recursos interactivos (como GeoGebra). Ideal para cualquier cátedra que inicia su producción.',
+    docId: '1AV-sOfl5EvA97Q0ECaJpy8t2ZdmT07mWO9U460b9nB8',
+    docUrl: 'https://docs.google.com/document/d/1AV-sOfl5EvA97Q0ECaJpy8t2ZdmT07mWO9U460b9nB8/edit?usp=sharing',
     fullText: `GUIÓN VIDEO: GUION GENÉRICO DE CLASE
 
 OBJETIVOS:
@@ -805,6 +809,8 @@ Placa de cierre con consigna de ejercitación para el Aula Virtual.`
     title: 'Video complejo: Clases híbridas en la Escuela de Graduados',
     badge: 'Producción Integral',
     clarification: 'Guión de alta complejidad dividido en 5 bloques temáticos (31 escenas). Articula exteriores, estudio FyPE con croma, demostración en aula de Note 3, micrófonos corbateros, cámaras móviles y pautas pedagógicas de participación remota y presencial.',
+    docId: '1kpKJPg5MAeaN0i4UGHZqJ5RCZaMmnEnscjxpB4UkBvI',
+    docUrl: 'https://docs.google.com/document/d/1kpKJPg5MAeaN0i4UGHZqJ5RCZaMmnEnscjxpB4UkBvI/edit?usp=sharing',
     fullText: `CLASES HÍBRIDAS EN LA ESCUELA DE GRADUADOS
 Guión para producción audiovisual
 
@@ -944,6 +950,8 @@ IMAGEN: Toma en aula de Graduados. Efecto digital de salida y créditos.`
     title: 'Introducción a una propuesta: Micromaster en Gestión de Servicios',
     badge: 'MOOC / Motion Graphics',
     clarification: 'Guión para video introductorio institucional/masivo. Detalla indicaciones precisas de motion graphics, animaciones geométricas (esquema hexagonal), transiciones de cámara y articulación temática de múltiples módulos (Marketing, Operaciones y RRHH).',
+    docId: '1PM4K_baIbPSFnjNJH7MeneKW2_rS4IP96RzL7tdtytQ',
+    docUrl: 'https://docs.google.com/document/d/1PM4K_baIbPSFnjNJH7MeneKW2_rS4IP96RzL7tdtytQ/edit?usp=sharing',
     fullText: `INTRODUCCIÓN GENERAL: MICROMASTER
 “Gestión de servicios: diseño integral de experiencias exitosas”
 Facultad de Ciencias Económicas - Universidad Nacional de Córdoba
@@ -1004,6 +1012,8 @@ IMAGEN: Zoom out, alrededor del esquema se muestran varios fragmentos de videos 
     title: 'Economía monetaria: Storytelling y gamificación',
     badge: 'Storytelling (60 seg)',
     clarification: 'Guión ágil de 60 segundos con formato narrativo (storytelling). Muestra cómo presentar experiencias lúdicas, postas de aprendizaje y dinámicas participativas en la cátedra.',
+    docId: '1rjFJePCNHA0hAJWmwkIQsIDwK2TcHEAbZW7qG8mYOmU',
+    docUrl: 'https://docs.google.com/document/d/1rjFJePCNHA0hAJWmwkIQsIDwK2TcHEAbZW7qG8mYOmU/edit?usp=sharing',
     fullText: `GUIÓN VIDEO: ECONOMÍA MONETARIA 2024
 Cátedra de Economía Monetaria - FCE UNC
 
@@ -1048,6 +1058,8 @@ IMAGEN: Signo de pregunta gráfico. Página web de FyPE (sección Ayudas para el
     title: 'Presentación de la cátedra Derecho Laboral',
     badge: 'Presentación de Cátedra',
     clarification: 'Guión estructurado para bienvenida de cuatrimestre con múltiples docentes a cámara en locaciones universitarias (aulas, biblioteca, pasillos), pautas de regularidad, comisiones y dinámicas de gamificación.',
+    docId: '1-ALZjGpa__LxJQlwEyUYOPHba7hSrKLmIhrepq7uUqI',
+    docUrl: 'https://docs.google.com/document/d/1-ALZjGpa__LxJQlwEyUYOPHba7hSrKLmIhrepq7uUqI/edit?usp=sharing',
     fullText: `GUIÓN VIDEO: CÁTEDRA DERECHO LABORAL Y DE LA SEGURIDAD SOCIAL
 Planificación de Presentación de Materia 2024
 
@@ -1110,6 +1122,8 @@ IMAGEN: Profesor 4 saludando a cámara con teléfono en mano. Graph: "¡Comenzam
     title: 'Invitación Futuribles: Enseñar y aprender en nuevos escenarios',
     badge: 'Convocatoria Institucional',
     clarification: 'Guión de convocatoria institucional a cámara doble con dos propuestas de realización: Propuesta A tradicional a cámara y Propuesta B dinámica con introducción inspirada en Star Wars, zócalos y mockups.',
+    docId: '1OLPn_LpPLwB98eCaRMtlI5DNJOZE_RjUobQ0ss5vcDY',
+    docUrl: 'https://docs.google.com/document/d/1OLPn_LpPLwB98eCaRMtlI5DNJOZE_RjUobQ0ss5vcDY/edit?usp=sharing',
     fullText: `GUIÓN VIDEO: JORNADAS FUTURIBLES FCE
 Objetivo: Invitar y promover inscripciones a jornadas docentes
 Referentes: Oscar y Gabriela
@@ -1165,17 +1179,20 @@ function initScriptEditor() {
   const titleEl = document.getElementById('script-modal-title');
   const badgeEl = document.getElementById('script-modal-badge');
   const subtitleEl = document.getElementById('script-modal-subtitle');
-  const contentEl = document.getElementById('script-modal-content');
-  const copyBtn = document.getElementById('script-modal-copy-btn');
-  const downloadBtn = document.getElementById('script-modal-download-btn');
-
-  let currentScriptText = '';
-  let currentScriptTitle = '';
+  const iframeEl = document.getElementById('script-modal-iframe') as HTMLIFrameElement | null;
+  const loadingEl = document.getElementById('script-modal-loading');
+  const copyDriveBtn = document.getElementById('script-modal-copy-drive-btn') as HTMLAnchorElement | null;
+  const downloadPdfBtn = document.getElementById('script-modal-download-pdf-btn') as HTMLAnchorElement | null;
+  const downloadDocxBtn = document.getElementById('script-modal-download-docx-btn') as HTMLAnchorElement | null;
+  const openDocBtn = document.getElementById('script-modal-open-doc-btn') as HTMLAnchorElement | null;
 
   const closeModal = () => {
     if (modal) {
       modal.classList.add('hidden');
       document.body.classList.remove('overflow-hidden');
+      if (iframeEl) {
+        iframeEl.src = '';
+      }
     }
   };
 
@@ -1194,41 +1211,48 @@ function initScriptEditor() {
     const script = SCRIPT_EXAMPLES.find(s => s.id === id);
     if (!script || !modal) return;
 
-    currentScriptText = script.fullText;
-    currentScriptTitle = script.title;
-
     if (titleEl) titleEl.textContent = script.title;
     if (badgeEl) badgeEl.textContent = script.badge;
     if (subtitleEl) subtitleEl.textContent = script.clarification;
-    if (contentEl) contentEl.textContent = script.fullText;
+
+    // Show loading spinner
+    if (loadingEl) {
+      loadingEl.classList.remove('opacity-0', 'pointer-events-none');
+    }
+
+    // Set Google Doc embedded preview URL
+    if (iframeEl) {
+      iframeEl.src = `https://docs.google.com/document/d/${script.docId}/preview`;
+      iframeEl.onload = () => {
+        if (loadingEl) {
+          loadingEl.classList.add('opacity-0', 'pointer-events-none');
+        }
+      };
+    }
+
+    // Configure Drive copy URL (clones file into user's own Drive)
+    if (copyDriveBtn) {
+      copyDriveBtn.href = `https://docs.google.com/document/d/${script.docId}/copy`;
+    }
+
+    // Configure direct export download URL (PDF)
+    if (downloadPdfBtn) {
+      downloadPdfBtn.href = `https://docs.google.com/document/d/${script.docId}/export?format=pdf`;
+    }
+
+    // Configure direct export download URL (Word .docx)
+    if (downloadDocxBtn) {
+      downloadDocxBtn.href = `https://docs.google.com/document/d/${script.docId}/export?format=docx`;
+    }
+
+    // Direct link to open original Google Doc
+    if (openDocBtn) {
+      openDocBtn.href = script.docUrl;
+    }
 
     modal.classList.remove('hidden');
     document.body.classList.add('overflow-hidden');
   };
-
-  if (copyBtn) {
-    copyBtn.addEventListener('click', () => {
-      if (!currentScriptText) return;
-      navigator.clipboard.writeText(currentScriptText).then(() => {
-        showToast('Guión copiado al portapapeles con éxito.');
-      });
-    });
-  }
-
-  if (downloadBtn) {
-    downloadBtn.addEventListener('click', () => {
-      if (!currentScriptText) return;
-      const blob = new Blob([currentScriptText], { type: 'text/plain;charset=utf-8' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      const cleanFileName = currentScriptTitle.replace(/[^a-zA-Z0-9_-]/g, '_').slice(0, 30);
-      a.download = `Guion_${cleanFileName}.txt`;
-      a.click();
-      URL.revokeObjectURL(url);
-      showToast('Archivo de guión descargado.');
-    });
-  }
 
   // Attach click listeners to all buttons requesting a script example
   document.querySelectorAll<HTMLButtonElement>('[data-open-script]').forEach(btn => {
@@ -1241,6 +1265,58 @@ function initScriptEditor() {
   });
 }
 
+export const GOOGLE_SHEET_URL = 'https://docs.google.com/spreadsheets/d/1CUjRUiYdA669F3G5AHXgEzAwm97nzKr7aRO0-vOH-hY/edit?usp=sharing';
+
+const GOOGLE_APPS_SCRIPT_SAMPLE = `function doPost(e) {
+  try {
+    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    
+    // Crear encabezados si la hoja está vacía
+    if (sheet.getLastRow() === 0) {
+      sheet.appendRow([
+        "Marca temporal",
+        "Código de trámite",
+        "Materia / Asignatura",
+        "Carrera / Departamento",
+        "Docente Responsable",
+        "Email Institucional",
+        "Teléfono / WhatsApp",
+        "Formato Audiovisual",
+        "Duración Estimada",
+        "Soportes Visuales",
+        "Post-producción",
+        "Enlace al Guion / Drive",
+        "Fecha tentativa",
+        "Observaciones Pedagógicas"
+      ]);
+    }
+
+    var data = JSON.parse(e.postData.contents);
+    sheet.appendRow([
+      data.fecha || new Date().toLocaleString("es-AR"),
+      data.codigo || "",
+      data.materia || "",
+      data.carrera || "",
+      data.docente || "",
+      data.email || "",
+      data.telefono || "",
+      data.formato || "",
+      data.duracion || "",
+      data.soportesVisuales || "",
+      data.postproduccion || "",
+      data.enlaceDrive || "",
+      data.fechaTentativa || "",
+      data.observaciones || ""
+    ]);
+
+    return ContentService.createTextOutput(JSON.stringify({ status: "success" }))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch (err) {
+    return ContentService.createTextOutput(JSON.stringify({ status: "error", message: err.toString() }))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}`;
+
 // Form Interactions & Submission
 function initFormInteractions() {
   const form = document.getElementById('production-form') as HTMLFormElement | null;
@@ -1250,7 +1326,63 @@ function initFormInteractions() {
   const confCodeEl = document.getElementById('conf-code');
   const confSummaryEl = document.getElementById('conf-summary');
   const confCopyBtn = document.getElementById('conf-copy-btn');
+  const confCopyRowBtn = document.getElementById('conf-copy-row-btn');
   const confDownloadBtn = document.getElementById('conf-download-btn');
+  const confSheetsMsg = document.getElementById('conf-sheets-msg');
+
+  // Google Sheets Config Modal
+  const sheetsConfigModal = document.getElementById('sheets-config-modal');
+  const btnOpenSheetsConfig = document.getElementById('btn-open-sheets-config');
+  const sheetsConfigCloseBtn = document.getElementById('sheets-config-close-btn');
+  const sheetsConfigCloseBtn2 = document.getElementById('sheets-config-close-btn-2');
+  const appsScriptCodeEl = document.getElementById('apps-script-code');
+  const btnCopyAppsScript = document.getElementById('btn-copy-apps-script');
+  const inputWebappUrl = document.getElementById('input-webapp-url') as HTMLInputElement | null;
+  const btnSaveWebappUrl = document.getElementById('btn-save-webapp-url');
+
+  if (appsScriptCodeEl) {
+    appsScriptCodeEl.textContent = GOOGLE_APPS_SCRIPT_SAMPLE;
+  }
+
+  if (inputWebappUrl) {
+    inputWebappUrl.value = localStorage.getItem('sheet_webapp_url') || '';
+  }
+
+  const openSheetsConfig = () => {
+    if (sheetsConfigModal) {
+      if (inputWebappUrl) inputWebappUrl.value = localStorage.getItem('sheet_webapp_url') || '';
+      sheetsConfigModal.classList.remove('hidden');
+      document.body.classList.add('overflow-hidden');
+    }
+  };
+
+  const closeSheetsConfig = () => {
+    if (sheetsConfigModal) {
+      sheetsConfigModal.classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
+    }
+  };
+
+  if (btnOpenSheetsConfig) btnOpenSheetsConfig.addEventListener('click', openSheetsConfig);
+  if (sheetsConfigCloseBtn) sheetsConfigCloseBtn.addEventListener('click', closeSheetsConfig);
+  if (sheetsConfigCloseBtn2) sheetsConfigCloseBtn2.addEventListener('click', closeSheetsConfig);
+
+  if (btnCopyAppsScript) {
+    btnCopyAppsScript.addEventListener('click', () => {
+      navigator.clipboard.writeText(GOOGLE_APPS_SCRIPT_SAMPLE).then(() => {
+        showToast('Código de Google Apps Script copiado al portapapeles.');
+      });
+    });
+  }
+
+  if (btnSaveWebappUrl && inputWebappUrl) {
+    btnSaveWebappUrl.addEventListener('click', () => {
+      const url = inputWebappUrl.value.trim();
+      localStorage.setItem('sheet_webapp_url', url);
+      showToast(url ? 'Conexión con Google Apps Script guardada correctamente.' : 'Configuración restablecida.');
+      closeSheetsConfig();
+    });
+  }
 
   // Populate Format Dropdown in Form
   const formatSelect = document.getElementById('form-formato') as HTMLSelectElement | null;
@@ -1303,9 +1435,10 @@ function initFormInteractions() {
   }
 
   let lastSubmissionText = '';
+  let lastSubmissionTsv = '';
 
   if (form) {
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
 
       // Gather form fields
@@ -1331,13 +1464,93 @@ function initFormInteractions() {
         return;
       }
 
+      const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+      const originalBtnHtml = submitBtn?.innerHTML || '';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `
+          <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+          </svg>
+          <span>Enviando y asentando en la planilla...</span>
+        `;
+      }
+
       const formatItem = FORMATS_DATA.find(f => f.id === formatoId);
       const requestCode = `AV-${new Date().getFullYear()}-${Math.floor(1000 + Math.random() * 9000)}`;
+      const fechaActual = new Date().toLocaleString('es-AR');
+
+      // Structured payload for Google Sheets
+      const sheetPayload = {
+        fecha: fechaActual,
+        codigo: requestCode,
+        materia,
+        carrera: carrera || 'No especificada',
+        docente,
+        email,
+        telefono: telefono || '-',
+        formato: formatItem ? `${formatItem.title} (${formatItem.category})` : formatoId,
+        duracion,
+        soportesVisuales: selectedVisual.length > 0 ? selectedVisual.join('; ') : 'Ninguno',
+        postproduccion: selectedPost.length > 0 ? selectedPost.join('; ') : 'Sin requerimientos adicionales',
+        enlaceDrive: driveLink || '-',
+        fechaTentativa: fecha || '-',
+        observaciones: notas || 'Sin observaciones'
+      };
+
+      // Tabular TSV representation for 1-click clipboard paste to Google Sheets
+      lastSubmissionTsv = [
+        sheetPayload.fecha,
+        sheetPayload.codigo,
+        sheetPayload.materia,
+        sheetPayload.carrera,
+        sheetPayload.docente,
+        sheetPayload.email,
+        sheetPayload.telefono,
+        sheetPayload.formato,
+        sheetPayload.duracion,
+        sheetPayload.soportesVisuales,
+        sheetPayload.postproduccion,
+        sheetPayload.enlaceDrive,
+        sheetPayload.fechaTentativa,
+        sheetPayload.observaciones
+      ].join('\t');
+
+      // Try automatic Google Apps Script webhook submission if configured
+      const webAppUrl = localStorage.getItem('sheet_webapp_url');
+      let directSubmitSuccess = false;
+
+      if (webAppUrl && webAppUrl.startsWith('http')) {
+        try {
+          await fetch(webAppUrl, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(sheetPayload)
+          });
+          directSubmitSuccess = true;
+        } catch (err) {
+          console.warn('Apps Script submission error:', err);
+        }
+      }
+
+      // Save to localStorage history
+      try {
+        const history = JSON.parse(localStorage.getItem('catedra_solicitudes_historial') || '[]');
+        history.unshift(sheetPayload);
+        localStorage.setItem('catedra_solicitudes_historial', JSON.stringify(history.slice(0, 50)));
+      } catch (e) {
+        console.warn('Error saving local history', e);
+      }
 
       lastSubmissionText = `==================================================
 SOLICITUD DE PRODUCCIÓN AUDIOVISUAL UNIVERSITARIA
 Código de Trámite: ${requestCode}
-Fecha de Emisión: ${new Date().toLocaleString()}
+Fecha de Emisión: ${fechaActual}
+Planilla de Destino: Google Sheets (ID: 1CUjRUiYdA669F3G5AHXgEzAwm97nzKr7aRO0-vOH-hY)
 ==================================================
 
 1. DATOS DE LA CÁTEDRA
@@ -1371,12 +1584,27 @@ Portal Docente de Preproducción`;
       if (confCodeEl) confCodeEl.textContent = requestCode;
       if (confSummaryEl) confSummaryEl.textContent = lastSubmissionText;
 
+      if (confSheetsMsg) {
+        if (directSubmitSuccess) {
+          confSheetsMsg.textContent = '✅ Respuesta enviada y asentada directamente en tu planilla de Google Sheets.';
+        } else {
+          confSheetsMsg.textContent = 'Solicitud lista para la planilla de Google Sheets. Podés verla directamente o copiar la fila tabulada.';
+        }
+      }
+
       if (confirmationModal) {
         confirmationModal.classList.remove('hidden');
         document.body.classList.add('overflow-hidden');
       }
 
       form.reset();
+
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnHtml;
+      }
+
+      showToast('¡Solicitud generada con éxito!');
     });
   }
 
@@ -1389,6 +1617,15 @@ Portal Docente de Preproducción`;
 
   if (confCloseBtn) confCloseBtn.addEventListener('click', closeConfirmation);
   if (confCloseBtn2) confCloseBtn2.addEventListener('click', closeConfirmation);
+
+  if (confCopyRowBtn) {
+    confCopyRowBtn.addEventListener('click', () => {
+      if (!lastSubmissionTsv) return;
+      navigator.clipboard.writeText(lastSubmissionTsv).then(() => {
+        showToast('Fila tabulada copiada. Podés pegarla directamente en la planilla (Ctrl+V).');
+      });
+    });
+  }
 
   if (confCopyBtn) {
     confCopyBtn.addEventListener('click', () => {
