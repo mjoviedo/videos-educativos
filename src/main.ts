@@ -35,7 +35,7 @@ export const POST_PRODUCTION_MAP: Record<string, { label: string; icon: string }
 export const FORMATS_DATA: VideoFormat[] = [
   {
     id: 'clase-diapositivas-pip',
-    title: 'Clase magistral con diapositivas',
+    title: 'Clase con presentación de diapositivas',
     category: 'Expositivo teórico',
     duration: '8 a 12 min',
     complexity: 'Baja',
@@ -63,7 +63,7 @@ export const FORMATS_DATA: VideoFormat[] = [
   },
   {
     id: 'tableta-resolucion-ejercicios',
-    title: 'Resolución de ejercicios en tableta',
+    title: 'Resolución de ejercicios a mano sobre papel',
     category: 'Práctico / Metodológico',
     duration: '6 a 10 min',
     complexity: 'Media',
@@ -71,13 +71,13 @@ export const FORMATS_DATA: VideoFormat[] = [
     pedagogicalRole: 'Facilita seguir el razonamiento algorítmico, fórmulas matemáticas, balances contables o diagramas de flujo sin saltos cognitivos.',
     visualSupports: ['escritura-mano'],
     postProductionNeeds: ['texto-imagenes', 'animaciones'],
-    youtubeId: 'ZXsQAXx_ao0',
+    youtubeId: 'MQ5l6OS2D14',
     recommendedFor: 'Matemática, Física, Química, Estadística, Economía, Programación básica.',
     preprodTips: 'Tener resuelto el ejercicio previamente en borrador; definir colores de tinta por nivel de variable o paso lógico.'
   },
   {
     id: 'screencast-software-tecnico',
-    title: 'Demostración Guiada de Software Especializado',
+    title: 'Demostración guiada de software especializado',
     category: 'Instrumental / Taller',
     duration: '7 a 12 min',
     complexity: 'Media',
@@ -85,27 +85,13 @@ export const FORMATS_DATA: VideoFormat[] = [
     pedagogicalRole: 'Guía paso a paso para la adopción de herramientas informáticas y metodologías de cálculo o modelado.',
     visualSupports: ['software-especifico', 'navegacion-web'],
     postProductionNeeds: ['texto-imagenes', 'animaciones'],
-    youtubeId: '_uQrJ0TkZlc',
+    youtubeId: 'P1ryrfSe_4Y',
     recommendedFor: 'Ingeniería, Ciencias Económicas, Biología, Arquitectura, Ciencias de la Computación.',
     preprodTips: 'Configurar la resolución de pantalla a 1920x1080; ampliar el tamaño del cursor del mouse y la tipografía de la interfaz.'
   },
   {
-    id: 'lectura-analisis-documento',
-    title: 'Lectura Crítica y Resaltado de Textos / Normativas',
-    category: 'Analítico / Comprensión',
-    duration: '5 a 9 min',
-    complexity: 'Baja',
-    description: 'Enfoque sobre un documento PDF, fallo judicial, fragmento de libro o artículo científico. El docente subraya pasajes clave y glosa el sentido interpretativo de la fuente.',
-    pedagogicalRole: 'Modela la competencia de lectura académica crítica y el análisis exegético de fuentes primarias.',
-    visualSupports: ['lectura-pdf', 'navegacion-web'],
-    postProductionNeeds: ['texto-imagenes'],
-    youtubeId: 'KxqlJBLhnfI',
-    recommendedFor: 'Derecho, Filosofía, Letras, Historia, Metodología de la Investigación.',
-    preprodTips: 'Tener el PDF previamente marcado con los colores institucionales; seleccionar párrafos clave sin exceder 3 páginas por video.'
-  },
-  {
     id: 'pildora-croma-animaciones',
-    title: 'Píldora Conceptual con Croma y Animaciones',
+    title: 'Desarrollo de conceptos complejos con fondo croma y animaciones',
     category: 'Impacto Conceptual',
     duration: '4 a 7 min',
     complexity: 'Alta',
@@ -113,27 +99,14 @@ export const FORMATS_DATA: VideoFormat[] = [
     pedagogicalRole: 'Genera alto enganche visual en temas abstractos o controversiales que requieren anclajes espaciales y metáforas visuales.',
     visualSupports: ['presentacion-diapositivas', 'visionado-videos'],
     postProductionNeeds: ['fondo-croma', 'animaciones', 'texto-imagenes'],
-    youtubeId: 'p_di4Zn4PDQ',
+    youtubeId: 'vFlD5fEYVFg',
     recommendedFor: 'Medicina, Biología Celular, Geología, Física Teórica, Módulos introductorios masivos.',
     preprodTips: 'NO vestir prendas verdes ni tramas de rayas finas; indicar en el guion en qué lado de la pantalla (izq/der) debe aparecer cada gráfico.'
   },
-  {
-    id: 'estudio-caso-video-archivo',
-    title: 'Análisis de Caso con Material de Archivo / B-Roll',
-    category: 'Contextual / Debate',
-    duration: '8 a 14 min',
-    complexity: 'Alta',
-    description: 'Articulación de la narración docente con fragmentos documentales, noticias históricas, registros etnográficos o imágenes de época para problematizar una situación real.',
-    pedagogicalRole: 'Conecta la teoría universitaria con problemas reales de la sociedad, la industria o la historia contemporánea.',
-    visualSupports: ['visionado-videos', 'navegacion-web'],
-    postProductionNeeds: ['video-archivo', 'texto-imagenes'],
-    youtubeId: 'V1y-mbWM3B8',
-    recommendedFor: 'Sociología, Comunicación, Historia, Gestión Ambiental, Salud Pública.',
-    preprodTips: 'Consignar los enlaces exactos y timecodes de los videos de archivo; verificar licencias de uso académico o Creative Commons.'
-  },
+
   {
     id: 'entrevista-dialogo-academico',
-    title: 'Diálogo Académico o Entrevista a Especialista',
+    title: 'Diálogo académico o entrevista a especialista',
     category: 'Colaborativo / Reflexivo',
     duration: '10 a 15 min',
     complexity: 'Media',
@@ -141,51 +114,23 @@ export const FORMATS_DATA: VideoFormat[] = [
     pedagogicalRole: 'Contrasta posturas teóricas diversas, visibiliza proyectos de extensión/investigación y humaniza la labor científica.',
     visualSupports: ['presentacion-diapositivas', 'lectura-pdf'],
     postProductionNeeds: ['texto-imagenes', 'video-archivo'],
-    youtubeId: 'L1T8F0tY1Xg',
+    youtubeId: 'FYoh8AYAAw0',
     recommendedFor: 'Seminarios de posgrado, Cátedras con profesores invitados, Formación profesional ética.',
     preprodTips: 'Enviar preguntas eje con anticipación al invitado; acordar un bloque temático no mayor a 15 minutos.'
   },
   {
-    id: 'recorrido-web-repositorios',
-    title: 'Navegación de Fuentes Web y Repositorios Académicos',
-    category: 'Alfabetización Digital',
-    duration: '6 a 10 min',
-    complexity: 'Baja',
-    description: 'Grabación de pantalla guiando al estudiante en la búsqueda bibliográfica en bases de datos (Scopus, PubMed, SciELO, Google Académico) y evaluación de fuentes científicas.',
-    pedagogicalRole: 'Desarrolla habilidades de investigación, citación académica y curaduría de información confiable.',
-    visualSupports: ['navegacion-web', 'lectura-pdf'],
-    postProductionNeeds: ['texto-imagenes'],
-    youtubeId: 'aircAruvnKk',
-    recommendedFor: 'Talleres de Tesis, Metodología, Prácticas Profesionales Supervisadas, Bibliotecología.',
-    preprodTips: 'Abrir previamente las pestañas necesarias en una ventana limpia del navegador sin marcadores personales visibles.'
-  },
-  {
-    id: 'demostracion-laboratorio-taller',
-    title: 'Demostración de Laboratorio o Taller Práctico',
-    category: 'Experimental / Protocolo',
+    id: 'explicacion-con-imagenes',
+    title: 'Explicación de un tema con imágenes',
+    category: 'Procesos / Conceptos',
     duration: '7 a 11 min',
     complexity: 'Alta',
     description: 'Registro audiovisual de procedimientos experimentales con planos detalle de instrumentos, manipulación de reactivos o maquinaria, señalización de normas de seguridad y cronómetros.',
     pedagogicalRole: 'Prepara a los alumnos para las prácticas presenciales, reduciendo errores operativos y garantizando bioseguridad.',
     visualSupports: ['software-especifico', 'escritura-mano', 'visionado-videos'],
     postProductionNeeds: ['texto-imagenes', 'animaciones', 'fondo-croma'],
-    youtubeId: '8S_GZ3r-x3g',
+    youtubeId: 'GuQlg3rCpTA',
     recommendedFor: 'Química, Biología, Odontología, Ingenierías de Procesos, Agronomía.',
     preprodTips: 'Elaborar un protocolo estricto de pasos; ensayar los movimientos de manos y tener duplicados de insumos por si se requiere repetir la toma.'
-  },
-    {
-    id: 'pizarra',
-    title: 'Uso de pizarra',
-    category: 'Alfabetización Digital',
-    duration: '6 a 10 min',
-    complexity: 'Baja',
-    description: 'Grabación de pantalla guiando al estudiante en la búsqueda bibliográfica en bases de datos (Scopus, PubMed, SciELO, Google Académico) y evaluación de fuentes científicas.',
-    pedagogicalRole: 'Desarrolla habilidades de investigación, citación académica y curaduría de información confiable.',
-    visualSupports: ['navegacion-web', 'lectura-pdf'],
-    postProductionNeeds: ['texto-imagenes'],
-    youtubeId: 'TLh_6G7i4_w',
-    recommendedFor: 'Talleres de Tesis, Metodología, Prácticas Profesionales Supervisadas, Bibliotecología.',
-    preprodTips: 'Abrir previamente las pestañas necesarias en una ventana limpia del navegador sin marcadores personales visibles.'
   }
 ];
 
