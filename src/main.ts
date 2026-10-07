@@ -26,10 +26,10 @@ export const VISUAL_SUPPORTS_MAP: Record<string, { label: string; icon: string }
 };
 
 export const POST_PRODUCTION_MAP: Record<string, { label: string; icon: string }> = {
-  'texto-imagenes': { label: 'Agregado de texto sobreimpreso o imágenes', icon: 'fa-font' },
-  'video-archivo': { label: 'Agregado de video de archivo', icon: 'fa-clapperboard' },
+  'texto-imagenes': { label: 'Texto sobreimpreso o imágenes', icon: 'fa-font' },
+  'video-archivo': { label: 'Video de archivo', icon: 'fa-clapperboard' },
   'fondo-croma': { label: 'Fondo croma', icon: 'fa-wand-magic-sparkles' },
-  'animaciones': { label: 'Agregado de animaciones', icon: 'fa-shapes' },
+  'animaciones': { label: 'Animaciones', icon: 'fa-shapes' },
 };
 
 export const FORMATS_DATA: VideoFormat[] = [
