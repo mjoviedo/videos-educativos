@@ -520,7 +520,7 @@
             </div>
           </div>
 
-          <!-- Col 2: Editor de Guion a 2 Columnas (7 cols) -->
+          <!-- Col 2: Ejemplos de Guión (7 cols) -->
           <div class="lg:col-span-7 bg-white rounded-2xl border border-slate-200 p-6 shadow-xs flex flex-col">
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4 pb-4 border-b border-slate-100">
               <div class="flex items-center gap-3">
@@ -528,50 +528,174 @@
                   📝
                 </div>
                 <div>
-                  <h3 class="text-base font-bold text-slate-900">Plantilla de Guion Didáctico a 2 Columnas</h3>
-                  <span class="text-xs text-slate-500">Estructurá los bloques audiovisuales antes de grabar</span>
+                  <h3 class="text-base font-bold text-slate-900">Ejemplos de guión</h3>
+                  <span class="text-xs text-slate-500">Modelos de guionado técnico-pedagógico con formato y locución</span>
                 </div>
               </div>
+              <span class="text-xs px-2.5 py-1 rounded-full bg-[#005360]/10 text-[#005360] font-semibold self-start sm:self-auto">
+                6 modelos disponibles
+              </span>
+            </div>
 
-              <div class="flex flex-wrap items-center gap-2">
-                <button id="btn-load-script-example" type="button" class="text-xs px-3 py-1.5 rounded-lg bg-[#005360]/10 text-[#005360] hover:bg-[#005360]/20 font-medium transition-colors">
-                  Cargar Ejemplo
+            <p class="text-xs text-slate-500 mb-4">
+              Consultá estos ejemplos para estructurar la locución y los soportes visuales de tu cátedra antes de grabar. Podés ver el contenido completo de cada guión haciendo clic en su enlace:
+            </p>
+
+            <!-- Lista de ejemplos de guión -->
+            <div class="space-y-3 flex-1 overflow-y-auto pr-1">
+              <!-- Item 1: (Destacado) Guión genérico -->
+              <div class="p-4 rounded-xl border-2 border-[#FFD200] bg-amber-50/40 hover:bg-amber-50/70 transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-xs">
+                <div class="flex-1">
+                  <div class="flex flex-wrap items-center gap-2 mb-1">
+                    <span class="px-2 py-0.5 rounded text-[10px] font-extrabold bg-[#FFD200] text-[#670000] uppercase tracking-wider">
+                      ★ Destacado
+                    </span>
+                    <h4 class="text-sm font-bold text-slate-900">Guión genérico</h4>
+                  </div>
+                  <p class="text-xs text-slate-600 leading-relaxed">
+                    Estructura base recomendada a dos columnas (Texto / Imagen). Define objetivos didácticos, destinatarios, medio de publicación e integra recursos interactivos (como GeoGebra). Ideal para cualquier cátedra que inicia su producción.
+                  </p>
+                </div>
+                <button 
+                  type="button" 
+                  data-open-script="guion-generico"
+                  class="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#B5121B] hover:bg-[#910e15] text-white text-xs font-bold transition-all shadow-xs shrink-0 cursor-pointer"
+                >
+                  <span>Ver guión</span>
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                  </svg>
                 </button>
-                <button id="btn-copy-script" type="button" class="text-xs px-3 py-1.5 rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-50 font-medium transition-colors">
-                  Copiar Guion
+              </div>
+
+              <!-- Item 2: Video complejo -->
+              <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/60 hover:bg-slate-50 transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div class="flex-1">
+                  <div class="flex flex-wrap items-center gap-2 mb-1">
+                    <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#670000]/10 text-[#670000]">
+                      Producción Integral
+                    </span>
+                    <h4 class="text-sm font-bold text-slate-900">Video complejo: Clases híbridas en la Escuela de Graduados</h4>
+                  </div>
+                  <p class="text-xs text-slate-600 leading-relaxed">
+                    Guión de alta complejidad dividido en 5 bloques temáticos (31 escenas). Articula exteriores, estudio FyPE con croma, demostración en aula de Note 3, micrófonos corbateros, cámaras móviles y pautas pedagógicas de participación remota y presencial.
+                  </p>
+                </div>
+                <button 
+                  type="button" 
+                  data-open-script="video-complejo"
+                  class="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl border border-slate-300 hover:border-[#B5121B] text-slate-700 hover:text-[#B5121B] hover:bg-white text-xs font-semibold transition-all shrink-0 cursor-pointer"
+                >
+                  <span>Ver guión</span>
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                  </svg>
                 </button>
-                <button id="btn-download-script" type="button" class="text-xs px-3 py-1.5 rounded-lg bg-[#B5121B] text-white hover:bg-[#910e15] font-medium transition-colors">
-                  Descargar (.txt)
+              </div>
+
+              <!-- Item 3: Introducción a una propuesta (complejo) -->
+              <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/60 hover:bg-slate-50 transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div class="flex-1">
+                  <div class="flex flex-wrap items-center gap-2 mb-1">
+                    <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#551E41]/10 text-[#551E41]">
+                      MOOC / Motion Graphics
+                    </span>
+                    <h4 class="text-sm font-bold text-slate-900">Introducción a una propuesta (complejo): Micromaster en Gestión de Servicios</h4>
+                  </div>
+                  <p class="text-xs text-slate-600 leading-relaxed">
+                    Guión para video introductorio institucional/masivo. Detalla indicaciones precisas de motion graphics, animaciones geométricas (esquema hexagonal), transiciones de cámara y articulación temática de múltiples módulos (Marketing, Operaciones y RRHH).
+                  </p>
+                </div>
+                <button 
+                  type="button" 
+                  data-open-script="intro-propuesta-complejo"
+                  class="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl border border-slate-300 hover:border-[#B5121B] text-slate-700 hover:text-[#B5121B] hover:bg-white text-xs font-semibold transition-all shrink-0 cursor-pointer"
+                >
+                  <span>Ver guión</span>
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Item 4: Economía monetaria -->
+              <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/60 hover:bg-slate-50 transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div class="flex-1">
+                  <div class="flex flex-wrap items-center gap-2 mb-1">
+                    <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#F37321]/15 text-[#F37321]">
+                      Storytelling (60 seg)
+                    </span>
+                    <h4 class="text-sm font-bold text-slate-900">Economía monetaria: Storytelling y gamificación</h4>
+                  </div>
+                  <p class="text-xs text-slate-600 leading-relaxed">
+                    Guión ágil de 60 segundos con formato narrativo (storytelling). Muestra cómo presentar experiencias lúdicas, dinámicas de 5 postas de aprendizaje y participación activa en la cátedra.
+                  </p>
+                </div>
+                <button 
+                  type="button" 
+                  data-open-script="economia-monetaria"
+                  class="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl border border-slate-300 hover:border-[#B5121B] text-slate-700 hover:text-[#B5121B] hover:bg-white text-xs font-semibold transition-all shrink-0 cursor-pointer"
+                >
+                  <span>Ver guión</span>
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Item 5: Presentación de la cátedra Derecho Laboral -->
+              <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/60 hover:bg-slate-50 transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div class="flex-1">
+                  <div class="flex flex-wrap items-center gap-2 mb-1">
+                    <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#005360]/10 text-[#005360]">
+                      Presentación de Cátedra
+                    </span>
+                    <h4 class="text-sm font-bold text-slate-900">Presentación de la cátedra Derecho Laboral y de la Seguridad Social</h4>
+                  </div>
+                  <p class="text-xs text-slate-600 leading-relaxed">
+                    Guión estructurado para bienvenida de cuatrimestre con múltiples docentes a cámara en locaciones universitarias (aulas, biblioteca, pasillos), pautas de regularidad, comisiones y dinámicas de gamificación.
+                  </p>
+                </div>
+                <button 
+                  type="button" 
+                  data-open-script="derecho-laboral"
+                  class="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl border border-slate-300 hover:border-[#B5121B] text-slate-700 hover:text-[#B5121B] hover:bg-white text-xs font-semibold transition-all shrink-0 cursor-pointer"
+                >
+                  <span>Ver guión</span>
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Item 6: Invitación Futuribles -->
+              <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/60 hover:bg-slate-50 transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div class="flex-1">
+                  <div class="flex flex-wrap items-center gap-2 mb-1">
+                    <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[#00B7CE]/15 text-[#005360]">
+                      Convocatoria Institucional
+                    </span>
+                    <h4 class="text-sm font-bold text-slate-900">Invitación Futuribles: Enseñar y aprender en nuevos escenarios</h4>
+                  </div>
+                  <p class="text-xs text-slate-600 leading-relaxed">
+                    Guión de convocatoria institucional a cámara doble con dos propuestas de realización: Propuesta A tradicional a cámara y Propuesta B dinámica con introducción inspirada en Star Wars, zócalos y mockups.
+                  </p>
+                </div>
+                <button 
+                  type="button" 
+                  data-open-script="invitacion-futuribles"
+                  class="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl border border-slate-300 hover:border-[#B5121B] text-slate-700 hover:text-[#B5121B] hover:bg-white text-xs font-semibold transition-all shrink-0 cursor-pointer"
+                >
+                  <span>Ver guión</span>
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                  </svg>
                 </button>
               </div>
             </div>
 
-            <p class="text-xs text-slate-500 mb-3">
-              Completá qué dirás (Audio) y qué se verá proyectado en pantalla (Video). Podés añadir o quitar bloques temáticos:
-            </p>
-
-            <div class="overflow-x-auto flex-1 mb-4">
-              <table class="w-full text-left border-collapse">
-                <thead>
-                  <tr class="bg-slate-50 text-[11px] font-bold text-slate-500 uppercase tracking-wider border-b border-slate-200">
-                    <th class="p-2.5 w-24">Tiempo</th>
-                    <th class="p-2.5">Audio (Lo que hablo)</th>
-                    <th class="p-2.5">Video (Lo que se ve)</th>
-                    <th class="p-2.5 w-32">Post-producción</th>
-                    <th class="p-2.5 w-10 text-center"></th>
-                  </tr>
-                </thead>
-                <tbody id="script-table-body">
-                  <!-- Rows injected by script -->
-                </tbody>
-              </table>
-            </div>
-
-            <div class="flex justify-between items-center pt-3 border-t border-slate-100 text-xs">
-              <button id="btn-add-script-row" type="button" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 font-medium transition-colors">
-                <span>+ Agregar Fila / Bloque</span>
-              </button>
-              <span class="text-slate-400">Podés adjuntar este archivo en tu solicitud de producción.</span>
+            <div class="pt-3 border-t border-slate-100 text-xs text-slate-500 flex items-center justify-between">
+              <span>💡 Podés usar cualquiera de estos modelos como referencia para el video de tu cátedra.</span>
             </div>
           </div>
         </div>
@@ -821,7 +945,7 @@
             <li><a href="#catalogo" class="hover:text-white transition-colors">Catálogo de Formatos</a></li>
             <li><a href="#pasos-preproduccion" class="hover:text-white transition-colors">5 Pasos de Preproducción</a></li>
             <li><a href="#herramientas" class="hover:text-white transition-colors">Calculadora de Palabras</a></li>
-            <li><a href="#herramientas" class="hover:text-white transition-colors">Plantilla de Guion</a></li>
+            <li><a href="#herramientas" class="hover:text-white transition-colors">Ejemplos de Guion</a></li>
             <li><a href="#solicitud" class="hover:text-white transition-colors">Formulario de Cátedra</a></li>
           </ul>
         </div>
@@ -942,6 +1066,54 @@
             </button>
             <button id="conf-download-btn" type="button" class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#B5121B] text-white hover:bg-[#910e15] text-xs font-semibold shadow-sm">
               💾 Descargar Constancia (.txt)
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL: Script Example Viewer -->
+    <div id="script-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto" role="dialog" aria-modal="true">
+      <div id="script-modal-backdrop" class="fixed inset-0 bg-slate-950/75 backdrop-blur-sm transition-opacity"></div>
+
+      <div class="relative bg-white rounded-3xl max-w-3xl w-full border border-slate-200 shadow-2xl overflow-hidden z-10 my-8 flex flex-col max-h-[90vh]">
+        <!-- Modal Header -->
+        <div class="flex items-start justify-between p-6 border-b border-slate-100 bg-slate-50">
+          <div>
+            <div class="flex items-center gap-2 mb-1.5">
+              <span id="script-modal-badge" class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-[#FFD200] text-[#670000] uppercase tracking-wider">
+                Destacado
+              </span>
+              <span class="text-xs text-slate-400">Ejemplo de Guion</span>
+            </div>
+            <h3 id="script-modal-title" class="text-xl font-bold text-slate-900 leading-snug">
+              Título del Guion
+            </h3>
+            <p id="script-modal-subtitle" class="text-xs text-slate-600 mt-1 leading-relaxed max-w-xl">
+              Aclaración pedagógica y técnica
+            </p>
+          </div>
+          <button id="script-modal-close-btn" type="button" class="text-slate-400 hover:text-slate-700 text-xl p-1 rounded-lg hover:bg-slate-200/60 transition-colors" aria-label="Cerrar modal">
+            ✕
+          </button>
+        </div>
+
+        <!-- Modal Body / Script Content -->
+        <div class="p-6 overflow-y-auto flex-1 bg-slate-900">
+          <pre id="script-modal-content" class="text-slate-200 text-xs font-mono leading-relaxed whitespace-pre-wrap select-all"></pre>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="p-4 sm:p-5 bg-white border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
+          <button id="script-modal-close-btn-2" type="button" class="px-4 py-2 rounded-xl text-slate-600 hover:bg-slate-100 text-xs font-semibold">
+            Cerrar
+          </button>
+          <div class="flex items-center gap-2">
+            <button id="script-modal-copy-btn" type="button" class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-50 text-xs font-bold transition-all shadow-xs cursor-pointer">
+              📋 Copiar Guion
+            </button>
+            <button id="script-modal-download-btn" type="button" class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#B5121B] hover:bg-[#910e15] text-white text-xs font-bold transition-all shadow-xs cursor-pointer">
+              💾 Descargar (.txt)
             </button>
           </div>
         </div>

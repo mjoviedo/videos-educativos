@@ -732,115 +732,513 @@ function initDurationCalculator() {
   textInput.addEventListener('input', calculate);
 }
 
-// 2-Column Script Generator
+// Script Examples Data and Viewer Modal
+export interface ScriptExample {
+  id: string;
+  title: string;
+  badge: string;
+  isFeatured?: boolean;
+  clarification: string;
+  fullText: string;
+  externalLink?: string;
+}
+
+export const SCRIPT_EXAMPLES: ScriptExample[] = [
+  {
+    id: 'guion-generico',
+    title: 'Guión genérico',
+    badge: 'Destacado',
+    isFeatured: true,
+    clarification: 'Estructura base recomendada a dos columnas (Texto / Imagen). Define objetivos, destinatarios, medio de publicación e integra recursos interactivos (como GeoGebra). Ideal para cualquier cátedra que inicia su producción.',
+    fullText: `GUIÓN VIDEO: GUION GENÉRICO DE CLASE
+
+OBJETIVOS:
+- Comprender la función lineal
+- Presentar la unidad temática
+
+DESTINATARIOS:
+Estudiantes de 3er año de administración
+
+MEDIO DE PUBLICACIÓN:
+Aula virtual / Campus institucional
+
+MATERIALES DE REFERENCIA:
+Videos de ejemplo y material interactivo GeoGebra
+
+==================================================
+DESARROLLO A DOS COLUMNAS
+==================================================
+
+[BLOQUE 1]
+TEXTO (Locución docente):
+¡Hola! Hoy veremos qué es una función lineal y cómo representarla gráficamente.
+IMAGEN (Pantalla / Soporte):
+Título sobreimpreso: “Funciones lineales”.
+
+[BLOQUE 2]
+TEXTO:
+Una función lineal tiene la forma f(x) = mx + b, donde m es la pendiente y b es la ordenada al origen.
+IMAGEN:
+La docente va dibujando el siguiente gráfico en una hoja o pizarra a medida que habla.
+
+[BLOQUE 3]
+TEXTO:
+La pendiente indica cuánto sube o baja la recta por cada unidad que avanza en x. Si m > 0 la recta sube; si m < 0 baja; si m = 0 es horizontal.
+IMAGEN:
+Se muestra el comportamiento de m con el siguiente material interactivo:
+https://www.geogebra.org/m/QCndQf8q
+
+[BLOQUE 4]
+TEXTO:
+El valor b es el punto donde la recta corta al eje y (cuando x = 0).
+IMAGEN:
+Observamos la pendiente negativa y la intersección en y = 3.
+
+[BLOQUE 5]
+TEXTO:
+¡Eso es todo! Practiquen con diferentes valores y verán cómo cambian las rectas.
+IMAGEN:
+Placa de cierre con consigna de ejercitación para el Aula Virtual.`
+  },
+  {
+    id: 'video-complejo',
+    title: 'Video complejo: Clases híbridas en la Escuela de Graduados',
+    badge: 'Producción Integral',
+    clarification: 'Guión de alta complejidad dividido en 5 bloques temáticos (31 escenas). Articula exteriores, estudio FyPE con croma, demostración en aula de Note 3, micrófonos corbateros, cámaras móviles y pautas pedagógicas de participación remota y presencial.',
+    fullText: `CLASES HÍBRIDAS EN LA ESCUELA DE GRADUADOS
+Guión para producción audiovisual
+
+--------------------------------------------------
+BLOQUE 0 - PRESENTACIÓN (Grabación en exterior y graduados)
+--------------------------------------------------
+Esc 01:
+TEXTO: En este vídeo queremos compartir algunas recomendaciones técnicas y pedagógicas para las clases híbridas que se desarrollen en la Escuela de Graduados de nuestra facultad.
+IMAGEN: Plano general. Exterior de la Escuela de Graduados. Tomas de la Escuela y las aulas.
+
+Esc 02:
+TEXTO: Pero… ¿Qué es una clase híbrida? ¿Qué particularidades tiene? ¿Cómo nos preparamos para la clase y qué debemos tener en cuenta antes y durante la misma?
+IMAGEN: En aula de graduados. Preguntas sobreimpresas.
+
+--------------------------------------------------
+BLOQUE 1 - LA CLASE HÍBRIDA - BLOQUE CONCEPTUAL (Grabación en estudio FyPE)
+--------------------------------------------------
+Esc 03:
+TEXTO: Cuando hablamos de clases híbridas nos referimos a una estrategia educativa en la que contamos en simultáneo con dos grupos de estudiantes. Uno de ellos está en el mismo espacio físico que el docente y el otro grupo se encuentra conectado en forma remota a través de videoconferencia.
+IMAGEN: Animación: destacar la denominación "Grupo Físico" y "Grupo Remoto".
+
+Esc 04:
+TEXTO: Las clases híbridas suponen la gestión del grupo físico y el grupo remoto en una propuesta educativa que los integre y permita su participación activa, sin importar dónde se encuentren. La secuencia didáctica que preparemos para la clase debe anticiparse a esta dualidad. Principalmente atendiendo a la interacción con y entre estudiantes. Resaltamos: La hibridez no debe ser impedimento para la participación activa.
+IMAGEN: Destacar sobreimpreso: "Participación activa" e "Interacción".
+
+Esc 05:
+TEXTO: En concreto lo híbrido abre posibilidades de integrar lo presencial y lo virtual, el espacio del aula física con otros espacios físicos y digitales. Ahora bien… ¿qué equipos técnicos harán todo esto posible?
+IMAGEN: Grabación en croma.
+
+--------------------------------------------------
+BLOQUE 2 - CLASE HÍBRIDA - EQUIPAMIENTO DEL AULA (Grabación en FyPE y graduados)
+--------------------------------------------------
+Esc 06:
+TEXTO: Una clase híbrida cuenta con 5 elementos centrales:
+* una computadora con pantalla táctil,
+* un monitor adicional,
+* sistema de amplificación de sonido,
+* cámara web,
+* micrófonos.
+IMAGEN: Placa EQUIPAMIENTO TÉCNICO. Sobreimpreso: COMPUTADORA, PANTALLA, PANTALLA TÁCTIL, MICRÓFONO, SONIDO, CÁMARA WEB.
+
+Esc 07:
+TEXTO: Desde secretaría de Graduados nos encargamos de que el equipamiento se encuentre conectado y funcionando antes de iniciar la clase. Y estamos atentos y disponibles si en algún momento de la clase algo no funciona. Es responsabilidad del docente presentarse 15 minutos antes de la clase para asegurar que todos los insumos estén listos e incorporar las tecnologías híbridas a la planificación de las clases. Hagamos un repaso por los dispositivos con los que vamos a interactuar:
+IMAGEN: Toma cartel secretaría graduados. Toma secretaría conectando equipos. Sobreimprime "Presentarse 15 minutos antes" y "Incorporar tecnologías híbridas".
+
+Esc 08:
+TEXTO: En primer lugar estaremos utilizando una computadora con sistema operativo windows. Este equipo cuenta con las herramientas básicas de ofimática, algunos softwares especializados y zoom para videoconferencia. En la escuela de graduados utilizaremos Zoom como nuestra plataforma principal, pero en caso de ser necesario, puede utilizarse Google Meet, Jitsi, u otros.
+IMAGEN: Graduados: se muestra la PC. Sobreimprime: COMPUTADORA.
+
+Esc 09:
+TEXTO: La pandemia seguramente nos ha familiarizado con los softwares de videoconferencia, pero está de más recomendarles que se familiaricen con su uso desde un rol docente, es decir, habituarse a la función de compartir y dejar de compartir pantalla o ventanas específicas, habilitar la grabación, (con o sin sonido). Pueden acceder a un tutorial de zoom escaneando este QR, o buscando el enlace en la descripción del video.
+IMAGEN: Grabación de pantalla de interfaz de windows, powerpoint, navegadores y zoom. QR, popup, enlace tutorial: https://support.zoom.us/hc/es/sections/4415034398477-Funciones-de-Zoom-Meetings
+
+Esc 10:
+TEXTO: La compu está conectada a dos pantallas. La principal, táctil, dedicada a lo que se quiera compartir en la clase. Y una adicional donde se muestra la videoconferencia y sus participantes.
+IMAGEN: Graduados. Sobreimprime: “PANTALLAS”.
+
+Esc 11:
+TEXTO: Las pantallas están configuradas en la modalidad “Extender escritorio”. Es decir, si movemos el mouse hacia los costados del monitor nos desplazaremos entre las distintas pantallas. Es importante saber esto porque puede suceder que al compartir pantalla o cambiar de un software a otro, la posición de las ventanas se modifique. Entonces, si esto ocurre, simplemente podemos arrastrar las ventanas de un monitor a otro.
+IMAGEN: Graduados. Toma de la secretaria en el aula mostrando el recorrido del mouse entre monitores.
+
+Esc 12:
+TEXTO: La pantalla táctil funciona también como un pizarrón expandido a partir de la aplicación Note 3. Pueden ver un tutorial siguiendo este enlace, también disponible en la descripción del video. El contenido de esta pantalla se comparte en la videoconferencia. En caso de hacer cambio de ventana, aplicación o compartir videos con audio, se debe chequear que se esté compartiendo bien en la sesión de zoom.
+IMAGEN: Graduados. PANTALLA TÁCTIL. Toma de Note 3 en uso. QR y enlace tutorial. Toma de compartir en zoom.
+
+Esc 13:
+TEXTO: El tema del sonido es algo realmente importante. Para una buena experiencia de cursado híbrido es indispensable que se escuche claro lo que sucede en el aula. Para asegurar esto, cada aula tendrá un micrófono corbatero o vincha, y un micrófono de mano para los estudiantes.
+IMAGEN: Graduados. Sobreimpreso: MICRÓFONO.
+
+Esc 14:
+TEXTO: Los micrófonos corbateros o de vincha son sensibles, por lo que es importante evitar los roces con nuestro cuerpo o ropa.
+IMAGEN: Toma detalle del micrófono corbatero. Screencapture zoom ruido de mic.
+
+Esc 15:
+TEXTO: … (alguien en el aula quiere participar, no se escucha.)
+IMAGEN: Screencapture de zoom, la cámara girando hacia quien participa.
+
+Esc 16:
+TEXTO: Recuerden, un buen sonido es central para una buena clase, comencemos la clase consultando si se escucha bien y nos detengamos si algo está funcionando mal hasta poder resolverlo.
+IMAGEN: Toma general en aula.
+
+Esc 17:
+TEXTO: El sonido dentro del aula física puede darse por los parlantes externos o el sonido de la pantalla táctil. El sonido ya estará configurado al iniciar la clase, pero en caso de querer modificar la salida de audio, lo pueden hacer desde la configuración de sonido del sistema o del mismo zoom.
+IMAGEN: Toma general. Screencapture salida de audio de zoom.
+
+Esc 18:
+TEXTO: Por último, las aulas están equipadas también con cámaras móviles a control remoto.
+IMAGEN: Toma general. Sobreimprime: CÁMARA WEB.
+
+Esc 19:
+TEXTO: Puede usarse con botones de acceso rápido a encuadres preestablecidos, o de manera manual con un cursor de movimiento y de zoom. Esto nos permite alternar el foco en distintos puntos del aula física.
+IMAGEN: Toma detalle del control remoto. Screencapture de movimientos de cámara.
+
+Esc 20:
+TEXTO: Es importante estar pendientes de no dar la espalda a la cámara y evitar salirse de cuadro. Pensemos que la cámara es toda una fila de estudiantes más y debemos atenderla por igual, sin darle la espalda y dirigiendo nuestra mirada cada tanto.
+IMAGEN: Screencapture: docente da la espalda, sale de cuadro y vuelve a dar la recomendación.
+
+Esc 21:
+TEXTO: Finalmente, es importante solicitar a la asistencia de la videoconferencia que mantengan sus micrófonos apagados cuando no se participa y mantener sus cámaras activadas todo el tiempo, ya que las cámaras apagadas se contabilizan como una ausencia.
+IMAGEN: Toma de sesión de zoom con cámaras prendidas.
+
+--------------------------------------------------
+BLOQUE 3 - RECOMENDACIONES PREVIAS A LA CLASE
+--------------------------------------------------
+Esc 22:
+TEXTO: Las clases híbridas abren un universo inmenso de posibilidades a la hora de desarrollar nuestras clases. A modo práctico, veamos juntos algunas recomendaciones que pueden enriquecer la planificación:
+IMAGEN: FyPE. Inserts divisores con títulos.
+
+Esc 23:
+TEXTO: * Diseñar las actividades: Pensar primero en la actividad del estudiante. Las formas de estar en el aula de ambos grupos son diferentes pero pueden ser complementarias... Prever a qué estamos invitando a realizar a los estudiantes en cada momento de la clase, contemplando los tiempos de participación de ambos grupos.
+IMAGEN: Placa didáctica.
+
+Esc 24:
+TEXTO: * Anticipar la dinámica: Una buena práctica que ayudará a la dinámica de las clases es que los estudiantes conozcan previamente la dinámica que se propone desarrollar, anticipando sus modos de participación tanto física como remota en el aula virtual.
+IMAGEN: Captura de aula virtual.
+
+Esc 25:
+TEXTO: * Tener un plan B: Las clases híbridas se apoyan fuertemente en la tecnología disponible. Como sabrán, siempre pueden existir imprevistos técnicos... Por ello es importante compartir los recursos de la clase o diseñar estrategias alternativas disponibles en el aula virtual.
+IMAGEN: Captura recursos de contingencia.
+
+--------------------------------------------------
+BLOQUE 4 - DURANTE LA CLASE - COMUNICATIVO Y PARTICIPACIÓN
+--------------------------------------------------
+Esc 26 a 30:
+TEXTO: Pautas de ubicación sin dar la espalda al grupo remoto, comprobación frecuente de micrófono, expresiones claras, tiempo para que se expresen ambos grupos, actividades colaborativas grupales (análisis de casos, debates) y retroalimentación interactiva (preguntas, cuestionarios, encuestas).
+IMAGEN: Sobreimpresos "Cuestiones comunicativas", "Cuestiones pedagógicas", "Retroalimentación".
+
+--------------------------------------------------
+BLOQUE 5 - CIERRE
+--------------------------------------------------
+Esc 31:
+TEXTO: Hemos llegado al final de este video introductorio. Esperamos encuentren útil esta información y disfruten de los desafíos que nos plantea esta nueva modalidad híbrida.
+IMAGEN: Toma en aula de Graduados. Efecto digital de salida y créditos.`
+  },
+  {
+    id: 'intro-propuesta-complejo',
+    title: 'Introducción a una propuesta: Micromaster en Gestión de Servicios',
+    badge: 'MOOC / Motion Graphics',
+    clarification: 'Guión para video introductorio institucional/masivo. Detalla indicaciones precisas de motion graphics, animaciones geométricas (esquema hexagonal), transiciones de cámara y articulación temática de múltiples módulos (Marketing, Operaciones y RRHH).',
+    fullText: `INTRODUCCIÓN GENERAL: MICROMASTER
+“Gestión de servicios: diseño integral de experiencias exitosas”
+Facultad de Ciencias Económicas - Universidad Nacional de Córdoba
+
+==================================================
+DESARROLLO DE ESCENAS Y MOTION GRAPHICS
+==================================================
+
+[ESCENA 1]
+TEXTO: Bienvenidos y bienvenidas al Micromaster “Gestión de servicios: diseño integral de experiencias exitosas”.
+IMAGEN: Texto central sobreimpreso: "Micromaster Gestión de servicios: diseño integral de experiencias exitosas".
+
+[ESCENA 2]
+TEXTO: El micromaster se compone de tres cursos: Marketing y estrategia, Operaciones y Recursos Humanos.
+IMAGEN: Hexágono delineado con tres hexágonos sólidos en tres puntas, cada una con el color y título correspondiente a cada MOOC.
+
+[ESCENA 3]
+TEXTO: Cada curso está dedicado a un área del modelo de integración gerencial de servicios. Este modelo propone una organización a partir de tres áreas trabajando de manera mancomunada y poniendo en el centro de atención tanto al cliente como al empleado.
+IMAGEN: Una trama hexagonal va ganando opacidad en el fondo, marcando tres porciones del fondo para cada área. Movimiento sutil de cámara focalizando cada área. Zoom in sutil al centro del hexágono: aparece ícono de persona con el título CLIENTE y luego ícono de trabajador con el título EMPLEADO.
+
+[ESCENA 4]
+TEXTO: Sin perder de vista esta configuración general cada curso profundizará en determinados conceptos, procesos y herramientas.
+IMAGEN: Zoom out al esquema general.
+
+[ESCENA 5]
+TEXTO: En el curso de Marketing y Estrategia evaluaremos las tendencias de consumo actual. Con casos de empresas reales, profundizaremos en el proceso de generación de valor para los clientes. Compartiremos modelos teóricos que nos permitirán encontrar las estrategias para satisfacer al cliente y fidelizarlo, creando experiencias exitosas de servicio.
+IMAGEN: Zoom in al hexágono de Marketing. A medida que se nombran los conceptos, aparecen líneas desde el hexágono hacia íconos destacados:
+- Tendencias de consumo: m-commerce
+- Empresas reales: shop
+- Generación de valor: premium quality
+- Modelos teóricos: idea developing
+- Satisfacer al cliente: wishlist
+
+[ESCENA 6]
+TEXTO: En el curso de Recursos Humanos pondremos el foco en los equipos de personas que forman los servicios. Veremos cuáles son las habilidades y competencias críticas para sostener una experiencia de servicio de calidad para los clientes; y estudiaremos dinámicas de atracción de talentos que potencien nuestro negocio, generando una cultura de alta performance.
+IMAGEN: Zoom in al hexágono de RRHH. Líneas conectando conceptos con íconos:
+- Equipos de personas: Team
+- Habilidades y competencias: Key idea
+- Servicio de calidad: Premium quality
+- Atracción de talentos: Student
+- Cultura de alta performance: Analysis
+
+[ESCENA 7]
+TEXTO: Finalmente, en el curso de Operaciones nos centraremos en los procesos de los servicios. Conocer las secuencias de eventos en la actividad de nuestra empresa es clave para diseñar propuestas que se adapten a las necesidades, problemas y preferencias de los consumidores...
+IMAGEN: Zoom in al hexágono de Operaciones. Íconos secuenciales de logística, abastecimiento, cálculo de costos y optimización de colas de espera.
+Línea continua fragmentada en tres secciones -> dos secciones más -> zoom in lupa -> trazados optimizados empalmándose y disminuyendo el largo total.
+
+[ESCENA 8]
+TEXTO: Una vez finalizado el micromaster estaremos capacitados para diagnosticar, diseñar y gestionar experiencias de servicio integrales y exitosas.
+IMAGEN: Zoom out. Texto en mayúscula: “DIAGNOSTICAR • DISEÑAR • GESTIONAR”.
+
+[ESCENA 9]
+TEXTO: Les damos la bienvenida al micromaster online, masivo y abierto de la Facultad de Ciencias Económicas de la Universidad Nacional de Córdoba.
+IMAGEN: Zoom out, alrededor del esquema se muestran varios fragmentos de videos producidos. Cierre con logos institucionales: UNCordobaX - Campus - FCE.`
+  },
+  {
+    id: 'economia-monetaria',
+    title: 'Economía monetaria: Storytelling y gamificación',
+    badge: 'Storytelling (60 seg)',
+    clarification: 'Guión ágil de 60 segundos con formato narrativo (storytelling). Muestra cómo presentar experiencias lúdicas, postas de aprendizaje y dinámicas participativas en la cátedra.',
+    fullText: `GUIÓN VIDEO: ECONOMÍA MONETARIA 2024
+Cátedra de Economía Monetaria - FCE UNC
+
+PLANIFICACIÓN:
+- Objetivo: Incentivar a otras cátedras a realizar experiencias de clases participativas y gamificación.
+- Destinatarios: Docentes y ayudantes de la facultad.
+- Canal de difusión: Comunidad docente virtual.
+- Tono: Dinámico, convocante, ágil.
+- Duración: 60 segundos.
+- Cierre: Llamado a la acción para contactar a FyPE.
+
+==================================================
+DESARROLLO DE LOCUCIÓN E IMAGEN
+==================================================
+
+[BLOQUE 1 - GANCHO / STORYTELLING]
+TEXTO: ¿Qué hacen estos estudiantes? ¿Por qué el sombrero del profesor Neder ayuda a mejorar la experiencia de aprendizaje?
+IMAGEN: Foto de estudiantes en poses extrañas. Video del profesor Neder con sombrero azul brillante (gancho para captar atención).
+
+[BLOQUE 2 - CONTEXTO]
+TEXTO: Por segundo año consecutivo la cátedra de economía monetaria realizó una clase de cierre especial.
+IMAGEN: Registros y tomas del aula del año anterior y actual.
+
+[BLOQUE 3 - LAS 5 POSTAS]
+TEXTO: Se trabajó en 5 postas: ping pong de preguntas y respuestas, entrevista televisiva, publicidad, canción y escenificación…
+IMAGEN: Imágenes rápidas y dinámicas de cada una de las 5 postas.
+
+[BLOQUE 4 - FUNDAMENTO DIDÁCTICO]
+TEXTO: Cada posta se construye en base a decisiones didácticas que procuran: ser diversas en el abordaje de contenidos e involucrar a los y las estudiantes como co-diseñadores de la clase.
+IMAGEN: Tomas de trabajo en equipo e interacción entre estudiantes.
+
+[BLOQUE 5 - RESULTADOS PEDAGÓGICOS]
+TEXTO: Este tipo de actividades promueve el desarrollo de habilidades orales, el uso de vocabulario específico y el trabajo en equipo. También ayudan a expresarse creativamente, recuperar experiencias previas y a participar activamente en la clase.
+IMAGEN: Planos detalle de los estudiantes explicando y debatiendo.
+
+[BLOQUE 6 - LLAMADO A LA ACCIÓN]
+TEXTO: Ahora: ¿Cómo puedo diseñar una clase de este tipo en mi cátedra? Visitá la Ayuda para el aula #8 sobre Gamificación o la #9 sobre el diseño de Actividades. Si te interesa llevar adelante una propuesta así, ponete en contacto con el equipo de FyPE.
+IMAGEN: Signo de pregunta gráfico. Página web de FyPE (sección Ayudas para el aula y Contacto). Placa institucional.`
+  },
+  {
+    id: 'derecho-laboral',
+    title: 'Presentación de la cátedra Derecho Laboral',
+    badge: 'Presentación de Cátedra',
+    clarification: 'Guión estructurado para bienvenida de cuatrimestre con múltiples docentes a cámara en locaciones universitarias (aulas, biblioteca, pasillos), pautas de regularidad, comisiones y dinámicas de gamificación.',
+    fullText: `GUIÓN VIDEO: CÁTEDRA DERECHO LABORAL Y DE LA SEGURIDAD SOCIAL
+Planificación de Presentación de Materia 2024
+
+RESPONSABLE DE CÁTEDRA: Pablo Rodriguez Saa
+DOCENTES A CÁMARA: Carlos Toselli, Andrea Moreno, Matias Musso, Valeria Prioletti.
+CANAL: YouTube embebido en sesión de Aula Virtual / Instagram.
+DURACIÓN: 2 minutos aproximadamente.
+TONO: Dinámico, claro, institucional.
+
+==================================================
+DESARROLLO A DOS COLUMNAS
+==================================================
+
+[ESCENA 1 - BIENVENIDA]
+TEXTO: Hola, con mucha alegría junto a parte de nuestro equipo de cátedra les damos la bienvenida al curso de Derecho Laboral y de la Seguridad Social.
+IMAGEN: Profesor 1 saludando a cámara con la mano bien abierta. Graph: "Les damos la bienvenida".
+
+[ESCENA 2 - EQUIPO INTERDISCIPLINARIO]
+TEXTO: Somos un equipo integrado por Abogados, Contadores, Licenciados en Administración y Recursos Humanos, lo que otorga una visión amplia del ejercicio de la profesión.
+IMAGEN: Profesor 2 en Sala de profesores. Graph: "¿Quiénes somos?".
+
+[ESCENA 3 - ENFOQUE POR COMPETENCIAS]
+TEXTO: Orientar el proceso de enseñanza y aprendizaje por competencias, entendiendo que no es suficiente con los contenidos básicos de la materia en un mundo complejo, que requiere flexibilidad y adaptación al cambio. Vamos a trabajar en grupos, en miras de fortalecer la comunicación, en busca de consensos.
+IMAGEN: Profesor 3 en aula con pizarrón de fondo. Graph: "¿Qué pretendemos?".
+
+[ESCENA 4 - PENSAMIENTO CRÍTICO]
+TEXTO: Para alcanzarlo es importante orientarlo a resultados, con un pensamiento lateral y a través de soluciones múltiples. Queremos fomentar el pensamiento crítico y la confianza en ustedes mismos.
+IMAGEN: Profesor 4 en pasillo de la facultad. Graph: "¿Qué buscamos?".
+
+[ESCENA 5 - COMPROMISO DEL ESTUDIANTE]
+TEXTO: ¡PERO para lograrlo, necesitamos de ustedes! Responsabilidad y disciplina. Leer los contenidos y ver los videos teóricos antes de cada clase, con el fin de poder sacarle provecho a cada uno de los encuentros presenciales.
+IMAGEN: Profesor 1 con gesto explicativo. Graph: "¿Qué necesitamos de ustedes?".
+
+[ESCENA 6 - HERRAMIENTAS Y CLASES]
+TEXTO: Las herramientas que tendrán disponibles son las siguientes:
+- El soporte teórico estará disponible en el canal de Youtube y en el manual de cátedra de la Editorial de la Facu.
+- Trabajaremos en comisiones, con 2 encuentros semanales.
+IMAGEN: Profesor 2 en sala de informática. Graph: "¿Qué herramientas utilizaremos?".
+
+[ESCENA 7 - RESIGNIFICAR LA PRESENCIALIDAD]
+TEXTO: Resignificamos la presencialidad. En cada clase grupos integrados por ustedes expondrán brevemente los temas que vieron en los videos y estudiaron previamente en el manual. Buscando cambiar roles, para luego trabajar en grupos diferentes casos y finalmente poner en común.
+IMAGEN: Profesor 3 hablando a cámara desde PCs de Biblioteca. Graph: "¿Cómo funcionan las clases presenciales?".
+
+[ESCENA 8 - GAMIFICACIÓN]
+TEXTO: Utilizaremos la Gamificación, lo que permite motivar a los grupos, con el fin de no cargarlos con muchos ejercicios por repetición, sino apuntar a la comprensión profunda en escenarios cambiantes.
+IMAGEN: Profesor 4 en salas grupales de Biblioteca. Graph: "¿Con qué otros recursos contamos?".
+
+[ESCENA 9 - CONDICIONES ACADÉMICAS]
+TEXTO: Vamos a lo importante: cómo se regulariza y promociona.
+Regularidad: Aprobación de 2 de 3 parciales y 50% de asistencia.
+Promoción: Aprobación de 3 parciales con nota 6 o más y promedio 7, más 50% de asistencia.
+IMAGEN: Profesor 2 tomando nota en escritorio. Graph: "¿Cómo se regulariza?".
+
+[ESCENA 10 - CIERRE Y EXÁMENES]
+TEXTO: Las fechas de parciales pueden verlas en el Aula Virtual. El examen final es oral. ¡Comenzamos! Los esperamos en clases; recuerden repasar el teórico antes de ir y navegar por el Aula Virtual. ¡Los esperamos!
+IMAGEN: Profesor 4 saludando a cámara con teléfono en mano. Graph: "¡Comenzamos!".`
+  },
+  {
+    id: 'invitacion-futuribles',
+    title: 'Invitación Futuribles: Enseñar y aprender en nuevos escenarios',
+    badge: 'Convocatoria Institucional',
+    clarification: 'Guión de convocatoria institucional a cámara doble con dos propuestas de realización: Propuesta A tradicional a cámara y Propuesta B dinámica con introducción inspirada en Star Wars, zócalos y mockups.',
+    fullText: `GUIÓN VIDEO: JORNADAS FUTURIBLES FCE
+Objetivo: Invitar y promover inscripciones a jornadas docentes
+Referentes: Oscar y Gabriela
+
+==================================================
+PROPUESTA A (Formato Convencional a Cámara)
+==================================================
+TEXTO 1 (Oscar):
+Queremos invitar a los y las docentes de la Facultad a las jornadas presenciales Futuribles FCE: Enseñar y aprender en nuevos escenarios que se realizarán el viernes 12 de noviembre a las 14:30 en nuestra Facultad.
+IMAGEN: Oscar a cámara. Gráfica: Día: 12/11 | Hora: 14:30 hs | Lugar: Aula O.
+
+TEXTO 2 (Gabriela):
+La jornada presencial contará con la participación de una especialista en el tema y será una oportunidad para encontrarnos a intercambiar ideas sobre las líneas estratégicas de desarrollo pedagógico de la FCE.
+IMAGEN: Música y gráfica animada con título "FUTURIBLES FCE". Inscripciones en: https://futuribles.eco.unc.edu.ar/
+
+TEXTO 3 (Gabriela):
+Durante estos dos últimos años hemos vivido profundas transformaciones en los modos de enseñar... Iniciamos el intercambio a través del canal de Telegram en 4 ejes:
+- Dimensión del espacio educativo
+- Temporalidad en la enseñanza
+- Interacción y comunicación educativa
+- Construcción del conocimiento transmedia.
+IMAGEN: Gabriela a cámara. Gráficos animados con íconos de los 4 ejes.
+
+TEXTO 4 (Oscar):
+Necesitamos pensarnos como comunidad, los estudiantes necesitan acuerdos entre materias, formas comunes de gestionar la enseñanza. Nos debemos la oportunidad de discutir hacia qué modelo educativo deseamos avanzar.
+IMAGEN: Oscar a cámara. Gráfica animada de los elementos de Futuribles.
+
+TEXTO 5 (Cierre conjunto):
+La jornada será un espacio de encuentro para pensar entre todos la facultad que se viene. Los y las esperamos.
+IMAGEN: Gráfica final con sitio web institucional.
+
+==================================================
+PROPUESTA B (Formato Dinámico / Estilo Star Wars)
+==================================================
+TEXTO:
+Oscar: Durante estos dos últimos años hemos vivido profundas transformaciones en los modos de enseñar...
+Gabriela: La pregunta que nos hacemos es qué, de todo eso que fuimos capaces de hacer, formará parte de la nueva normalidad...
+IMAGEN:
+Voces en off intercaladas con intro formato texto deslizante sobre fondo estrellado (estilo Star Wars).
+Transición a fondo institucional con Oscar y Gabriela a cámara.
+Zócalo: OSCAR y GABY | FUTURIBLES | 12/11 - 14:30 hs - Aula O.
+Mockup de celular mostrando canal de Telegram y ejes temáticos.
+Cierre con pantalla de invitación e inscripción directa.`
+  }
+];
+
+// Initialize Script Modal and Viewers
 function initScriptEditor() {
-  const tbody = document.getElementById('script-table-body');
-  const addRowBtn = document.getElementById('btn-add-script-row');
-  const loadExampleBtn = document.getElementById('btn-load-script-example');
-  const copyScriptBtn = document.getElementById('btn-copy-script');
-  const downloadScriptBtn = document.getElementById('btn-download-script');
+  const modal = document.getElementById('script-modal');
+  const modalBackdrop = document.getElementById('script-modal-backdrop');
+  const closeBtn1 = document.getElementById('script-modal-close-btn');
+  const closeBtn2 = document.getElementById('script-modal-close-btn-2');
+  const titleEl = document.getElementById('script-modal-title');
+  const badgeEl = document.getElementById('script-modal-badge');
+  const subtitleEl = document.getElementById('script-modal-subtitle');
+  const contentEl = document.getElementById('script-modal-content');
+  const copyBtn = document.getElementById('script-modal-copy-btn');
+  const downloadBtn = document.getElementById('script-modal-download-btn');
 
-  if (!tbody) return;
+  let currentScriptText = '';
+  let currentScriptTitle = '';
 
-  const createRow = (time: string, audio: string, video: string, notes: string) => {
-    const tr = document.createElement('tr');
-    tr.className = 'border-b border-slate-200 hover:bg-slate-50/50 transition-colors';
-    tr.innerHTML = `
-      <td class="p-2.5 align-top">
-        <input type="text" value="${time}" placeholder="00:00 - 00:45" class="w-full text-xs font-mono p-2 border border-slate-200 rounded-lg focus:border-blue-500 focus:outline-none" />
-      </td>
-      <td class="p-2.5 align-top">
-        <textarea rows="3" placeholder="Locución del docente (lo que se dice)..." class="w-full text-xs p-2 border border-slate-200 rounded-lg focus:border-blue-500 focus:outline-none resize-y">${audio}</textarea>
-      </td>
-      <td class="p-2.5 align-top">
-        <textarea rows="3" placeholder="Soporte en pantalla (diapositiva, PDF, cámara)..." class="w-full text-xs p-2 border border-slate-200 rounded-lg focus:border-blue-500 focus:outline-none resize-y">${video}</textarea>
-      </td>
-      <td class="p-2.5 align-top">
-        <input type="text" value="${notes}" placeholder="Texto sobreimpreso, zoom, etc." class="w-full text-xs p-2 border border-slate-200 rounded-lg focus:border-blue-500 focus:outline-none" />
-      </td>
-      <td class="p-2.5 align-top text-center">
-        <button type="button" class="btn-del-row p-1.5 text-slate-400 hover:text-red-600 rounded-lg hover:bg-red-50 transition-colors" title="Eliminar fila">
-          ✕
-        </button>
-      </td>
-    `;
-    const delBtn = tr.querySelector('.btn-del-row');
-    if (delBtn) {
-      delBtn.addEventListener('click', () => {
-        tr.remove();
-      });
+  const closeModal = () => {
+    if (modal) {
+      modal.classList.add('hidden');
+      document.body.classList.remove('overflow-hidden');
     }
-    return tr;
   };
 
-  if (addRowBtn) {
-    addRowBtn.addEventListener('click', () => {
-      tbody.appendChild(createRow('', '', '', ''));
-    });
-  }
+  if (closeBtn1) closeBtn1.addEventListener('click', closeModal);
+  if (closeBtn2) closeBtn2.addEventListener('click', closeModal);
+  if (modalBackdrop) modalBackdrop.addEventListener('click', closeModal);
 
-  if (loadExampleBtn) {
-    // Populate with initial starter rows automatically
-    tbody.innerHTML = '';
-    tbody.appendChild(createRow('00:00 - 00:40', '¡Bienvenidos y bienvenidas a la Unidad 3! Hoy desglosaremos el Teorema Central del Límite y su impacto en la inferencia estadística.', 'Docente a plano medio con placa de presentación de la Cátedra de Estadística I.', 'Sobreimpreso: Unidad 3: Inferencia Estadística'));
-    tbody.appendChild(createRow('00:40 - 02:30', 'Observemos este conjunto de muestras independientes tomadas de una distribución asimétrica...', 'Compartir pantalla con software RStudio ejecutando histogramas de densidad.', 'Zoom sobre el comando ggplot2 y el gráfico resultante'));
-    tbody.appendChild(createRow('02:30 - 04:15', 'A medida que el tamaño muestral n supera 30, la campana gaussiana emerge con claridad.', 'Diapositiva animada con la fórmula matemática y resaltado en color rojo del error estándar.', 'Animación: sigma / sqrt(n) resaltado'));
-    tbody.appendChild(createRow('04:15 - 05:00', 'Para la próxima clase práctica, descarguen la guía de actividades del Campus Virtual y repliquen este script.', 'Plano del docente con enlace al Campus Virtual y fecha del trabajo práctico.', 'Placa final con créditos y bibliografía'));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal && !modal.classList.contains('hidden')) {
+      closeModal();
+    }
+  });
 
-    loadExampleBtn.addEventListener('click', () => {
-      tbody.innerHTML = '';
-      tbody.appendChild(createRow('00:00 - 00:40', '¡Bienvenidos y bienvenidas a la Unidad 3! Hoy desglosaremos el Teorema Central del Límite y su impacto en la inferencia estadística.', 'Docente a plano medio con placa de presentación de la Cátedra de Estadística I.', 'Sobreimpreso: Unidad 3: Inferencia Estadística'));
-      tbody.appendChild(createRow('00:40 - 02:30', 'Observemos este conjunto de muestras independientes tomadas de una distribución asimétrica...', 'Compartir pantalla con software RStudio ejecutando histogramas de densidad.', 'Zoom sobre el comando ggplot2 y el gráfico resultante'));
-      tbody.appendChild(createRow('02:30 - 04:15', 'A medida que el tamaño muestral n supera 30, la campana gaussiana emerge con claridad.', 'Diapositiva animada con la fórmula matemática y resaltado en color rojo del error estándar.', 'Animación: sigma / sqrt(n) resaltado'));
-      tbody.appendChild(createRow('04:15 - 05:00', 'Para la próxima clase práctica, descarguen la guía de actividades del Campus Virtual y repliquen este script.', 'Plano del docente con enlace al Campus Virtual y fecha del trabajo práctico.', 'Placa final con créditos y bibliografía'));
-      showToast('Plantilla de ejemplo cargada con éxito.');
-    });
-  }
+  // Expose global function to open script
+  (window as unknown as { openScriptExample: (id: string) => void }).openScriptExample = (id: string) => {
+    const script = SCRIPT_EXAMPLES.find(s => s.id === id);
+    if (!script || !modal) return;
 
-  // Helper to compile script into text
-  const getScriptText = (): string => {
-    const rows = tbody.querySelectorAll('tr');
-    let output = '=== GUION TÉCNICO DIDÁCTICO A 2 COLUMNAS ===\n\n';
-    rows.forEach((row, i) => {
-      const inputs = row.querySelectorAll('input, textarea');
-      const time = (inputs[0] as HTMLInputElement)?.value || '';
-      const audio = (inputs[1] as HTMLTextAreaElement)?.value || '';
-      const video = (inputs[2] as HTMLTextAreaElement)?.value || '';
-      const notes = (inputs[3] as HTMLInputElement)?.value || '';
+    currentScriptText = script.fullText;
+    currentScriptTitle = script.title;
 
-      output += `[BLOQUE ${i + 1}] TIEMPO: ${time}\n`;
-      output += `AUDIO (Locución docente):\n${audio}\n`;
-      output += `VIDEO (Pantalla / Soporte):\n${video}\n`;
-      if (notes) output += `POST-PRODUCCIÓN: ${notes}\n`;
-      output += '--------------------------------------------------\n\n';
-    });
-    return output;
+    if (titleEl) titleEl.textContent = script.title;
+    if (badgeEl) badgeEl.textContent = script.badge;
+    if (subtitleEl) subtitleEl.textContent = script.clarification;
+    if (contentEl) contentEl.textContent = script.fullText;
+
+    modal.classList.remove('hidden');
+    document.body.classList.add('overflow-hidden');
   };
 
-  if (copyScriptBtn) {
-    copyScriptBtn.addEventListener('click', () => {
-      const text = getScriptText();
-      navigator.clipboard.writeText(text).then(() => {
-        showToast('Guion copiado al portapapeles.');
-      }).catch(() => {
-        showToast('Error al copiar.');
+  if (copyBtn) {
+    copyBtn.addEventListener('click', () => {
+      if (!currentScriptText) return;
+      navigator.clipboard.writeText(currentScriptText).then(() => {
+        showToast('Guión copiado al portapapeles con éxito.');
       });
     });
   }
 
-  if (downloadScriptBtn) {
-    downloadScriptBtn.addEventListener('click', () => {
-      const text = getScriptText();
-      const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+  if (downloadBtn) {
+    downloadBtn.addEventListener('click', () => {
+      if (!currentScriptText) return;
+      const blob = new Blob([currentScriptText], { type: 'text/plain;charset=utf-8' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `Guion_Preproduccion_Catedra_${new Date().toISOString().slice(0, 10)}.txt`;
+      const cleanFileName = currentScriptTitle.replace(/[^a-zA-Z0-9_-]/g, '_').slice(0, 30);
+      a.download = `Guion_${cleanFileName}.txt`;
       a.click();
       URL.revokeObjectURL(url);
-      showToast('Archivo descargado con éxito.');
+      showToast('Archivo de guión descargado.');
     });
   }
+
+  // Attach click listeners to all buttons requesting a script example
+  document.querySelectorAll<HTMLButtonElement>('[data-open-script]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const scriptId = btn.getAttribute('data-open-script');
+      if (scriptId) {
+        (window as unknown as { openScriptExample: (id: string) => void }).openScriptExample(scriptId);
+      }
+    });
+  });
 }
 
 // Form Interactions & Submission
