@@ -313,10 +313,10 @@ function renderCatalog() {
   }
 
   container.innerHTML = filtered.map(item => {
-    const complexityColor = 
-      item.complexity === 'Baja' ? 'bg-[#00B7CE]/15 text-[#005360] border-[#00B7CE]/40' :
-      item.complexity === 'Media' ? 'bg-[#FFD200]/25 text-[#670000] border-[#FFD200]/70' :
-      'bg-[#B5121B]/15 text-[#B5121B] border-[#B5121B]/40';
+    const complexityBadgeStyle = 
+      item.complexity === 'Baja' ? 'bg-emerald-600 text-white border border-emerald-400/40' :
+      item.complexity === 'Media' ? 'bg-[#FFD200] text-[#670000] border border-[#FFD200]/80 font-bold' :
+      'bg-[#B5121B] text-white border border-[#B5121B]/40';
 
     const visualBadges = item.visualSupports.map(v => {
       const info = VISUAL_SUPPORTS_MAP[v];
@@ -346,13 +346,13 @@ function renderCatalog() {
           />
           <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-900/30 to-transparent"></div>
           
-          <!-- Category & Duration Pills -->
+          <!-- Category & Complexity Pills -->
           <div class="absolute top-3 left-3 flex flex-wrap gap-1.5 z-10">
             <span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-white/95 text-slate-800 shadow-sm backdrop-blur-sm">
               ${item.category}
             </span>
-            <span class="px-2 py-1 rounded-full text-xs font-medium bg-slate-900/80 text-white border border-white/20 backdrop-blur-sm">
-              ⏱ ${item.duration}
+            <span class="px-2.5 py-1 rounded-full text-xs font-semibold shadow-sm backdrop-blur-sm ${complexityBadgeStyle}">
+              ⏱ ${item.complexity}
             </span>
           </div>
 
@@ -373,13 +373,10 @@ function renderCatalog() {
 
         <!-- Card Body -->
         <div class="p-5 flex-1 flex flex-col">
-          <div class="flex items-start justify-between gap-3 mb-2">
+          <div class="mb-2">
             <h3 class="text-lg font-bold text-slate-900 group-hover:text-[#B5121B] transition-colors leading-snug">
               ${item.title}
             </h3>
-            <span class="shrink-0 px-2.5 py-0.5 text-xs font-semibold rounded-full border ${complexityColor}">
-              ${item.complexity}
-            </span>
           </div>
 
           <p class="text-slate-600 text-sm leading-relaxed mb-4">
@@ -387,7 +384,7 @@ function renderCatalog() {
           </p>
 
           <div class="p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs text-slate-700 mb-4">
-            <strong class="text-slate-900 font-semibold block mb-0.5">Valor Pedagógico:</strong>
+            <strong class="text-slate-900 font-semibold block mb-0.5">Valor pedagógico:</strong>
             ${item.pedagogicalRole}
           </div>
 

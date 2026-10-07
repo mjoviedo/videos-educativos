@@ -2,5 +2,7 @@
   "name": "Pre-producción Audiovisual Universitaria",
   "description": "Catálogo interactivo de formatos audiovisuales educativos y guía de preproducción para cátedras universitarias.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }
