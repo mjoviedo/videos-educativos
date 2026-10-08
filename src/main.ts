@@ -1210,8 +1210,6 @@ function initScriptEditor() {
   });
 }
 
-export const GOOGLE_SHEET_URL = 'https://docs.google.com/spreadsheets/d/1CUjRUiYdA669F3G5AHXgEzAwm97nzKr7aRO0-vOH-hY/edit?usp=sharing';
-
 const GOOGLE_APPS_SCRIPT_SAMPLE = `function doPost(e) {
   try {
     var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
@@ -1264,6 +1262,68 @@ const GOOGLE_APPS_SCRIPT_SAMPLE = `function doPost(e) {
       data.observaciones || ""
     ]);
 
+    // Enviar notificación por correo electrónico a la coordinación
+    try {
+      var destinatario = Session.getEffectiveUser().getEmail() || Session.getActiveUser().getEmail();
+      var asunto = "🎬 Nueva Solicitud Audiovisual [" + (data.codigo || "Cátedra") + "]: " + (data.materia || "Materia");
+      
+      var cuerpoTexto = "Se ha recibido una nueva solicitud de producción audiovisual universitaria:\\n\\n" +
+        "• Código de trámite: " + (data.codigo || "-") + "\\n" +
+        "• Fecha: " + (data.fecha || new Date().toLocaleString("es-AR")) + "\\n" +
+        "• Materia / Asignatura: " + (data.materia || "-") + "\\n" +
+        "• Carrera / Departamento: " + (data.carrera || "-") + "\\n" +
+        "• Docente Responsable: " + (data.docente || "-") + "\\n" +
+        "• Email Institucional: " + (data.email || "-") + "\\n" +
+        "• Teléfono / WhatsApp: " + (data.telefono || "-") + "\\n" +
+        "• Formato Audiovisual: " + (data.formato || "-") + "\\n" +
+        "• Duración Estimada: " + (data.duracion || "-") + "\\n" +
+        "• Soportes Visuales: " + (data.soportesVisuales || "-") + "\\n" +
+        "• Post-producción: " + (data.postproduccion || "-") + "\\n" +
+        "• Enlace al Guion / Drive: " + (data.enlaceDrive || "-") + "\\n" +
+        "• Fecha tentativa: " + (data.fechaTentativa || "-") + "\\n" +
+        "• Observaciones Pedagógicas:\\n" + (data.observaciones || "-") + "\\n\\n" +
+        "Acceder a la planilla completa: " + SpreadsheetApp.getActiveSpreadsheet().getUrl();
+
+      var cuerpoHtml = '<div style="font-family: Arial, sans-serif; max-width: 650px; color: #1e293b; line-height: 1.5; padding: 16px; border: 1px solid #e2e8f0; border-radius: 12px;">' +
+        '<div style="background-color: #551E41; color: white; padding: 16px 20px; border-radius: 8px 8px 0 0;">' +
+          '<h2 style="margin: 0; font-size: 18px;">🎬 Nueva Solicitud de Producción Audiovisual</h2>' +
+          '<p style="margin: 4px 0 0; font-size: 13px; opacity: 0.9;">Código de Trámite: <strong>' + (data.codigo || '-') + '</strong></p>' +
+        '</div>' +
+        '<div style="padding: 16px 8px;">' +
+          '<table style="width: 100%; border-collapse: collapse; font-size: 13px;">' +
+            '<tr><td style="padding: 6px 0; color: #64748b; width: 35%;"><strong>Materia / Asignatura:</strong></td><td style="padding: 6px 0; font-weight: bold; color: #0f172a;">' + (data.materia || '-') + '</td></tr>' +
+            '<tr><td style="padding: 6px 0; color: #64748b;"><strong>Carrera / Dpto.:</strong></td><td style="padding: 6px 0;">' + (data.carrera || '-') + '</td></tr>' +
+            '<tr><td style="padding: 6px 0; color: #64748b;"><strong>Docente Responsable:</strong></td><td style="padding: 6px 0;">' + (data.docente || '-') + '</td></tr>' +
+            '<tr><td style="padding: 6px 0; color: #64748b;"><strong>Email Institucional:</strong></td><td style="padding: 6px 0;"><a href="mailto:' + (data.email || '') + '">' + (data.email || '-') + '</a></td></tr>' +
+            '<tr><td style="padding: 6px 0; color: #64748b;"><strong>Teléfono / WhatsApp:</strong></td><td style="padding: 6px 0;">' + (data.telefono || '-') + '</td></tr>' +
+            '<tr style="border-top: 1px solid #e2e8f0;"><td style="padding: 6px 0; color: #64748b;"><strong>Formato Audiovisual:</strong></td><td style="padding: 6px 0; font-weight: bold; color: #551E41;">' + (data.formato || '-') + '</td></tr>' +
+            '<tr><td style="padding: 6px 0; color: #64748b;"><strong>Duración Estimada:</strong></td><td style="padding: 6px 0;">' + (data.duracion || '-') + '</td></tr>' +
+            '<tr><td style="padding: 6px 0; color: #64748b;"><strong>Soportes Visuales:</strong></td><td style="padding: 6px 0;">' + (data.soportesVisuales || '-') + '</td></tr>' +
+            '<tr><td style="padding: 6px 0; color: #64748b;"><strong>Post-producción:</strong></td><td style="padding: 6px 0;">' + (data.postproduccion || '-') + '</td></tr>' +
+            '<tr><td style="padding: 6px 0; color: #64748b;"><strong>Enlace a Guion / Drive:</strong></td><td style="padding: 6px 0;">' + (data.enlaceDrive && data.enlaceDrive !== '-' ? '<a href="' + data.enlaceDrive + '" target="_blank">' + data.enlaceDrive + '</a>' : '-') + '</td></tr>' +
+            '<tr><td style="padding: 6px 0; color: #64748b;"><strong>Fecha tentativa:</strong></td><td style="padding: 6px 0;">' + (data.fechaTentativa || '-') + '</td></tr>' +
+            '<tr style="border-top: 1px solid #e2e8f0;"><td style="padding: 6px 0; color: #64748b; vertical-align: top;"><strong>Observaciones:</strong></td><td style="padding: 6px 0; white-space: pre-line;">' + (data.observaciones || '-') + '</td></tr>' +
+          '</table>' +
+          '<div style="margin-top: 20px; text-align: center;">' +
+            '<a href="' + SpreadsheetApp.getActiveSpreadsheet().getUrl() + '" style="background-color: #059669; color: white; padding: 10px 18px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 13px; display: inline-block;">📊 Abrir Planilla de Google Sheets</a>' +
+          '</div>' +
+        '</div>' +
+        '<div style="background-color: #f8fafc; padding: 10px 14px; border-radius: 0 0 8px 8px; font-size: 11px; color: #64748b; text-align: center; border-top: 1px solid #e2e8f0;">' +
+          'Portal de Producción Audiovisual Educativa • Universidad Nacional de Córdoba' +
+        '</div>' +
+      '</div>';
+
+      MailApp.sendEmail({
+        to: destinatario,
+        replyTo: data.email || destinatario,
+        subject: asunto,
+        body: cuerpoTexto,
+        htmlBody: cuerpoHtml
+      });
+    } catch(errMail) {
+      Logger.log("Error enviando email: " + errMail.toString());
+    }
+
     return ContentService.createTextOutput(JSON.stringify({ status: "success", row: sheet.getLastRow() }))
       .setMimeType(ContentService.MimeType.JSON);
   } catch (err) {
@@ -1292,8 +1352,7 @@ function initFormInteractions() {
   const confCodeEl = document.getElementById('conf-code');
   const confSummaryEl = document.getElementById('conf-summary');
   const confCopyBtn = document.getElementById('conf-copy-btn');
-  const confCopyRowBtn = document.getElementById('conf-copy-row-btn');
-  const confDownloadBtn = document.getElementById('conf-download-btn');
+  const confMailtoBtn = document.getElementById('conf-mailto-btn') as HTMLAnchorElement | null;
   const confSheetsMsg = document.getElementById('conf-sheets-msg');
   const confSheetsIcon = document.getElementById('conf-sheets-icon');
   const confSheetsTitle = document.getElementById('conf-sheets-title');
@@ -1349,7 +1408,6 @@ function initFormInteractions() {
   }
 
   let lastSubmissionText = '';
-  let lastSubmissionTsv = '';
 
   if (form) {
     form.addEventListener('submit', async (e) => {
@@ -1413,24 +1471,6 @@ function initFormInteractions() {
         observaciones: notas || 'Sin observaciones'
       };
 
-      // Tabular TSV representation for 1-click clipboard paste to Google Sheets
-      lastSubmissionTsv = [
-        sheetPayload.fecha,
-        sheetPayload.codigo,
-        sheetPayload.materia,
-        sheetPayload.carrera,
-        sheetPayload.docente,
-        sheetPayload.email,
-        sheetPayload.telefono,
-        sheetPayload.formato,
-        sheetPayload.duracion,
-        sheetPayload.soportesVisuales,
-        sheetPayload.postproduccion,
-        sheetPayload.enlaceDrive,
-        sheetPayload.fechaTentativa,
-        sheetPayload.observaciones
-      ].join('\t');
-
       // Automatic Google Apps Script submission for general use
       const webAppUrl = GOOGLE_APPS_SCRIPT_WEBAPP_URL || localStorage.getItem('sheet_webapp_url') || '';
       let directSubmitSuccess = false;
@@ -1464,7 +1504,7 @@ function initFormInteractions() {
 SOLICITUD DE PRODUCCIÓN AUDIOVISUAL UNIVERSITARIA
 Código de Trámite: ${requestCode}
 Fecha de Emisión: ${fechaActual}
-Planilla de Destino: Google Sheets (ID: 1CUjRUiYdA669F3G5AHXgEzAwm97nzKr7aRO0-vOH-hY)
+Registro: Trámite Oficial de Producción Audiovisual Docente
 ==================================================
 
 1. DATOS DE LA CÁTEDRA
@@ -1500,8 +1540,14 @@ Portal Docente de Preproducción`;
 
       if (confSheetsMsg) {
         if (confSheetsIcon) confSheetsIcon.textContent = '✅';
-        if (confSheetsTitle) confSheetsTitle.textContent = '¡Solicitud Asentada en Google Sheets!';
-        confSheetsMsg.textContent = 'La solicitud fue registrada de manera directa en la planilla oficial de cátedras.';
+        if (confSheetsTitle) confSheetsTitle.textContent = '¡Solicitud Registrada y Notificada!';
+        confSheetsMsg.textContent = 'La solicitud ha quedado registrada correctamente en el sistema y se envió el aviso al equipo de producción.';
+      }
+
+      if (confMailtoBtn) {
+        const mailSubject = encodeURIComponent(`🎬 Solicitud Producción Audiovisual [${requestCode}] - ${materia}`);
+        const mailBody = encodeURIComponent(lastSubmissionText);
+        confMailtoBtn.href = `mailto:?subject=${mailSubject}&body=${mailBody}`;
       }
 
       if (confirmationModal) {
@@ -1530,33 +1576,11 @@ Portal Docente de Preproducción`;
   if (confCloseBtn) confCloseBtn.addEventListener('click', closeConfirmation);
   if (confCloseBtn2) confCloseBtn2.addEventListener('click', closeConfirmation);
 
-  if (confCopyRowBtn) {
-    confCopyRowBtn.addEventListener('click', () => {
-      if (!lastSubmissionTsv) return;
-      navigator.clipboard.writeText(lastSubmissionTsv).then(() => {
-        showToast('Fila tabulada copiada. Podés pegarla directamente en la planilla (Ctrl+V).');
-      });
-    });
-  }
-
   if (confCopyBtn) {
     confCopyBtn.addEventListener('click', () => {
       navigator.clipboard.writeText(lastSubmissionText).then(() => {
         showToast('Resumen copiado para enviar por correo institucional.');
       });
-    });
-  }
-
-  if (confDownloadBtn) {
-    confDownloadBtn.addEventListener('click', () => {
-      const blob = new Blob([lastSubmissionText], { type: 'text/plain;charset=utf-8' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `Solicitud_Produccion_Catedra_${Date.now()}.txt`;
-      a.click();
-      URL.revokeObjectURL(url);
-      showToast('Comprobante descargado.');
     });
   }
 }

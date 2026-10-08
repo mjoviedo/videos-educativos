@@ -720,23 +720,13 @@
           <!-- Form Card -->
           <div id="production-form-card" class="bg-white rounded-3xl border border-slate-300 shadow-xl p-6 sm:p-10 transition-all">
             
-            <!-- Registro directo en Google Sheets -->
-            <div class="mb-6 p-3 sm:p-4 rounded-2xl bg-emerald-50/70 border border-emerald-200/80 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs text-slate-800">
-              <div class="flex items-center gap-2.5">
-                <span class="text-lg">📊</span>
-                <div>
-                  <span class="font-bold text-slate-900">Registro Automático:</span>
-                  <span class="text-slate-600 block sm:inline sm:ml-1">Las solicitudes se asientan directamente en la planilla oficial de producción docente.</span>
-                </div>
+            <!-- Registro directo de la solicitud -->
+            <div class="mb-6 p-3 sm:p-4 rounded-2xl bg-emerald-50/70 border border-emerald-200/80 flex items-center gap-3 text-xs text-slate-800">
+              <span class="text-lg">📋</span>
+              <div>
+                <span class="font-bold text-slate-900">Registro Automático Centralizado:</span>
+                <span class="text-slate-600 block sm:inline sm:ml-1">Las solicitudes se asientan directamente en el sistema de producción audiovisual docente.</span>
               </div>
-              <a 
-                href="https://docs.google.com/spreadsheets/d/1CUjRUiYdA669F3G5AHXgEzAwm97nzKr7aRO0-vOH-hY/edit?usp=sharing" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white font-semibold transition-colors self-end sm:self-auto shrink-0 text-[11px] shadow-2xs"
-              >
-                <span>Ver Planilla Oficial ↗</span>
-              </a>
             </div>
 
             <form id="production-form" class="space-y-8">
@@ -974,16 +964,10 @@
         <div>
           <span class="text-xs font-bold uppercase tracking-wider text-slate-300 block mb-3">Contacto institucional</span>
           <p class="text-xs text-slate-400 mb-2 leading-relaxed">
-            Lic. Marcos Oviedo<br>
-            Equipo de producción multimedia<br>
-            Área de Formación Docente y Producción Educativa<br>
-            Consultas: moviedo -arroba- unc.edu.ar
+            Área de Tecnología Educativa y Producción Multimedial<br>
+            Secretaría de Asuntos Académicos<br>
+            Facultad de Ciencias Económicas • Universidad Nacional de Córdoba
           </p>
-          <!--
-          <span class="inline-block px-2.5 py-1 rounded bg-slate-900 border border-slate-800 text-[11px] text-slate-400">
-            Horario: Lunes a Viernes de 8:00 a 19:00
-          </span>
-          -->
         </div>
       </div>
 
@@ -1075,27 +1059,14 @@
           Se ha generado la constancia de preproducción con los requerimientos técnicos y soportes especificados:
         </p>
 
-        <!-- Google Sheets Direct Registration Notification -->
-        <div id="conf-sheets-status" class="mb-4 p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-xs">
-          <div class="flex items-center gap-2.5">
-            <span id="conf-sheets-icon" class="text-lg">✅</span>
-            <div>
-              <span id="conf-sheets-title" class="font-bold text-emerald-950 block">Registro Asentado en Google Sheets</span>
-              <span id="conf-sheets-msg" class="text-emerald-800 text-[11px]">
-                La solicitud ha sido registrada correctamente en la planilla oficial de cátedra.
-              </span>
-            </div>
-          </div>
-          <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
-            <a 
-              href="https://docs.google.com/spreadsheets/d/1CUjRUiYdA669F3G5AHXgEzAwm97nzKr7aRO0-vOH-hY/edit?usp=sharing" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs transition-colors shrink-0 shadow-xs"
-            >
-              <span>Ver en Google Sheets</span>
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-            </a>
+        <!-- Registration Notification -->
+        <div id="conf-sheets-status" class="mb-4 p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-slate-800 flex items-center gap-2.5 shadow-xs">
+          <span id="conf-sheets-icon" class="text-lg">✅</span>
+          <div>
+            <span id="conf-sheets-title" class="font-bold text-emerald-950 block">Solicitud Registrada y Notificada</span>
+            <span id="conf-sheets-msg" class="text-emerald-800 text-[11px]">
+              La solicitud ha quedado registrada correctamente en el sistema y se notificó al equipo de producción.
+            </span>
           </div>
         </div>
 
@@ -1106,15 +1077,12 @@
             Cerrar
           </button>
           <div class="flex flex-wrap items-center gap-2">
-            <button id="conf-copy-row-btn" type="button" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-emerald-300 text-emerald-900 hover:bg-emerald-50 text-xs font-semibold cursor-pointer" title="Copia los datos tabulados para pegar directamente en una fila de Google Sheets (Ctrl+V)">
-              📋 Copiar Fila para Sheets
-            </button>
             <button id="conf-copy-btn" type="button" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-50 text-xs font-semibold cursor-pointer">
-              ✉️ Copiar para Email
+              📋 Copiar Texto
             </button>
-            <button id="conf-download-btn" type="button" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#B5121B] text-white hover:bg-[#910e15] text-xs font-semibold shadow-xs cursor-pointer">
-              💾 Descargar (.txt)
-            </button>
+            <a id="conf-mailto-btn" href="#" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl border border-blue-200 bg-blue-50 text-blue-900 hover:bg-blue-100 text-xs font-semibold cursor-pointer">
+              ✉️ Enviar por Email
+            </a>
           </div>
         </div>
       </div>
