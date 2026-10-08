@@ -20,9 +20,11 @@ export const VISUAL_SUPPORTS_MAP: Record<string, { label: string; icon: string }
   'presentacion-diapositivas': { label: 'Presentación de diapositivas', icon: 'fa-file-powerpoint' },
   'lectura-pdf': { label: 'Lectura y resaltado de documentos o PDFs', icon: 'fa-file-lines' },
   'visionado-videos': { label: 'Visionado de otros videos o animaciones', icon: 'fa-film' },
+  'tablet': { label: 'Tablet', icon: 'fa-film' },
   'software-especifico': { label: 'Uso de un software específico', icon: 'fa-laptop-code' },
   'navegacion-web': { label: 'Navegación web', icon: 'fa-globe' },
   'escritura-mano': { label: 'Escritura o resolución de ejercicios a mano', icon: 'fa-pen-fancy' },
+  'pizarra': { label: 'Escritura en pizarra', icon: 'fa-pen-fancy' },
 };
 
 export const POST_PRODUCTION_MAP: Record<string, { label: string; icon: string }> = {
@@ -35,12 +37,12 @@ export const POST_PRODUCTION_MAP: Record<string, { label: string; icon: string }
 export const FORMATS_DATA: VideoFormat[] = [
   {
     id: 'clase-diapositivas-pip',
-    title: 'Clase con presentación de diapositivas',
-    category: 'Expositivo teórico',
+    title: 'Presentación con diapositivas',
+    category: 'Exposición ',
     duration: '8 a 12 min',
     complexity: 'Baja',
-    description: 'El docente expone una temática con su imagen en recuadro (Picture-in-Picture) alternando con diapositivas de alta legibilidad, esquemas sintéticos y palabras clave.',
-    pedagogicalRole: 'Ideal para presentaciones de unidad temática, encuadres teóricos y síntesis de módulos curriculares.',
+    description: 'Grabación en estudio alternando planos del docente con diapositivas de alta legibilidad, esquemas sintéticos y palabras clave.',
+    pedagogicalRole: 'Acompaña la exposición con soportes visuales favoreciendo la comprensión de conceptos o procedimientos.',
     visualSupports: ['presentacion-diapositivas', 'lectura-pdf'],
     postProductionNeeds: ['texto-imagenes'],
     youtubeId: '2561rT_Fbgc',
@@ -49,14 +51,14 @@ export const FORMATS_DATA: VideoFormat[] = [
   },
   {
     id: 'pizarra-resolucion-ejercicios',
-    title: 'Resolución de ejercicios en pizarra',
+    title: 'Exposición con pizarra',
     category: 'Práctico / Metodológico',
     duration: '6 a 10 min',
     complexity: 'Baja',
-    description: 'El formato más similar a una clase presencial. Grabación de una exposición teórica y/o práctica frente a una pizarra.',
-    pedagogicalRole: 'Facilita seguir el razonamiento con soporte visual a medida.',
-    visualSupports: ['escritura-mano'],
-    postProductionNeeds: ['ninguna'],
+    description: 'El formato más similar a una clase presencial. Grabación de una exposición teórica y/o práctica frente a una pizarra. Puede ser en estudio de FyPE o un aula a convenir.',
+    pedagogicalRole: 'Facilita seguir el razonamiento con soporte visual a medida. Se siente como estar en el aula presencial.',
+    visualSupports: ['pizarra'],
+    postProductionNeeds: ['Ninguna'],
     youtubeId: 'WRibE2nt8wM',
     recommendedFor: 'Matemática, Física, Química, Estadística, Economía, Programación básica.',
     preprodTips: 'Tener resuelto el ejercicio previamente en borrador; definir colores de tinta por nivel de variable o paso lógico.'
@@ -66,14 +68,28 @@ export const FORMATS_DATA: VideoFormat[] = [
     title: 'Resolución de ejercicios a mano sobre papel',
     category: 'Práctico / Metodológico',
     duration: '6 a 10 min',
-    complexity: 'Media',
-    description: 'Grabación sincronizada del trazo manuscrito en tableta digitalizadora o pizarra virtual, con voz en off y resaltadores de color para desglosar desarrollos paso a paso.',
-    pedagogicalRole: 'Facilita seguir el razonamiento algorítmico, fórmulas matemáticas, balances contables o diagramas de flujo sin saltos cognitivos.',
+    complexity: 'Baja',
+    description: 'Grabación sincronizada del trazo manuscrito sobre papel, con resaltadores de color para desglosar desarrollos paso a paso.',
+    pedagogicalRole: 'Facilita seguir el razonamiento paso a paso con un óptimo nivel de personalización. Se siente como una clase de consulta mano a mano.',
     visualSupports: ['escritura-mano'],
-    postProductionNeeds: ['texto-imagenes', 'animaciones'],
-    youtubeId: 'MQ5l6OS2D14',
-    recommendedFor: 'Matemática, Física, Química, Estadística, Economía, Programación básica.',
+    postProductionNeeds: ['texto-imagenes'],
+    youtubeId: 'K_Kn_sGSDVA',
+    recommendedFor: 'Matemática, Estadística, Economía, Programación básica.',
     preprodTips: 'Tener resuelto el ejercicio previamente en borrador; definir colores de tinta por nivel de variable o paso lógico.'
+  },
+  {
+    id: 'tableta-resolucion-ejercicios',
+    title: 'Exposición o resolución de ejercicios con tablet',
+    category: 'Práctico / Metodológico',
+    duration: '6 a 10 min',
+    complexity: 'Media',
+    description: 'Grabación sincronizada del trazo manuscrito o zoom, resaltado o gestos en tableta digitalizadora.',
+    pedagogicalRole: 'Facilita seguir el razonamiento siguiendo el foco en cada momento y a cada acción.',
+    visualSupports: ['tablet'],
+    postProductionNeeds: ['texto-imagenes'],
+    youtubeId: 'YbKhyMbKSrQ',
+    recommendedFor: 'Matemática, Estadística, Economía, Programación básica.',
+    preprodTips: 'Ejercitar la exposición con un esquema previo de lo que será dibujado o resaltado.'
   },
   {
     id: 'screencast-software-tecnico',
@@ -81,29 +97,28 @@ export const FORMATS_DATA: VideoFormat[] = [
     category: 'Instrumental / Taller',
     duration: '7 a 12 min',
     complexity: 'Media',
-    description: 'Captura directa de pantalla mostrando la interfaz y operación de programas específicos (R, SPSS, Python, GIS, CAD, simuladores) con zoom dinámico y atajos señalados.',
+    description: 'Captura directa de pantalla mostrando la interfaz y operación de programas específicos (R, Python, simuladores, etc).',
     pedagogicalRole: 'Guía paso a paso para la adopción de herramientas informáticas y metodologías de cálculo o modelado.',
     visualSupports: ['software-especifico', 'navegacion-web'],
-    postProductionNeeds: ['texto-imagenes', 'animaciones'],
+    postProductionNeeds: ['texto-imagenes'],
     youtubeId: 'P1ryrfSe_4Y',
     recommendedFor: 'Ingeniería, Ciencias Económicas, Biología, Arquitectura, Ciencias de la Computación.',
     preprodTips: 'Configurar la resolución de pantalla a 1920x1080; ampliar el tamaño del cursor del mouse y la tipografía de la interfaz.'
   },
-  {
-    id: 'pildora-croma-animaciones',
-    title: 'Desarrollo de conceptos complejos con fondo croma y animaciones',
-    category: 'Impacto Conceptual',
-    duration: '4 a 7 min',
-    complexity: 'Alta',
-    description: 'Grabación del docente en estudio con pantalla verde (croma) interactuando con gráficos animados, líneas temporales flotantes, modelos tridimensionales y conceptos dinámicos.',
-    pedagogicalRole: 'Genera alto enganche visual en temas abstractos o controversiales que requieren anclajes espaciales y metáforas visuales.',
-    visualSupports: ['presentacion-diapositivas', 'visionado-videos'],
-    postProductionNeeds: ['fondo-croma', 'animaciones', 'texto-imagenes'],
-    youtubeId: 'vFlD5fEYVFg',
-    recommendedFor: 'Medicina, Biología Celular, Geología, Física Teórica, Módulos introductorios masivos.',
-    preprodTips: 'NO vestir prendas verdes ni tramas de rayas finas; indicar en el guion en qué lado de la pantalla (izq/der) debe aparecer cada gráfico.'
+ {
+    id: 'mesa-redonda',
+    title: 'Mesa redonda',
+    category: 'Colaborativo / Reflexivo',
+    duration: '15 a 30 min',
+    complexity: 'Media',
+    description: 'Conversación grupal a dos cámaras. Formato mesa radial o programa de streaming.',
+    pedagogicalRole: 'Contrasta posturas teóricas diversas, visibiliza proyectos de extensión/investigación y humaniza la labor científica.',
+    visualSupports: ['Ninguno'],
+    postProductionNeeds: ['texto-imagenes'],
+    youtubeId: 'lTYN09GcBhI',
+    recommendedFor: 'Seminarios de posgrado, Cátedras con profesores invitados, Formación profesional ética.',
+    preprodTips: 'Preparar una presentación de cada participante. Tener un punteo de los temas a tratar. No pisarse al hablar.'
   },
-
   {
     id: 'entrevista-dialogo-academico',
     title: 'Diálogo académico o entrevista a especialista',
@@ -112,26 +127,40 @@ export const FORMATS_DATA: VideoFormat[] = [
     complexity: 'Media',
     description: 'Conversación pautada a dos cámaras o formato híbrido entre miembros de la cátedra o con un investigador invitado externo, intercalando esquemas e imágenes de apoyo.',
     pedagogicalRole: 'Contrasta posturas teóricas diversas, visibiliza proyectos de extensión/investigación y humaniza la labor científica.',
-    visualSupports: ['presentacion-diapositivas', 'lectura-pdf'],
-    postProductionNeeds: ['texto-imagenes', 'video-archivo'],
+    visualSupports: ['Ninguno'],
+    postProductionNeeds: ['texto-imagenes'],
     youtubeId: 'FYoh8AYAAw0',
     recommendedFor: 'Seminarios de posgrado, Cátedras con profesores invitados, Formación profesional ética.',
     preprodTips: 'Enviar preguntas eje con anticipación al invitado; acordar un bloque temático no mayor a 15 minutos.'
   },
   {
     id: 'explicacion-con-imagenes',
-    title: 'Explicación de un tema con imágenes',
+    title: 'Ritmo ágil y descontracturado con imágenes estáticas',
     category: 'Procesos / Conceptos',
     duration: '7 a 11 min',
     complexity: 'Alta',
     description: 'Registro audiovisual de procedimientos experimentales con planos detalle de instrumentos, manipulación de reactivos o maquinaria, señalización de normas de seguridad y cronómetros.',
     pedagogicalRole: 'Prepara a los alumnos para las prácticas presenciales, reduciendo errores operativos y garantizando bioseguridad.',
-    visualSupports: ['software-especifico', 'escritura-mano', 'visionado-videos'],
-    postProductionNeeds: ['texto-imagenes', 'animaciones', 'fondo-croma'],
+    visualSupports: ['Ninguno'],
+    postProductionNeeds: ['texto-imagenes', 'animaciones'],
     youtubeId: 'GuQlg3rCpTA',
-    recommendedFor: 'Química, Biología, Odontología, Ingenierías de Procesos, Agronomía.',
-    preprodTips: 'Elaborar un protocolo estricto de pasos; ensayar los movimientos de manos y tener duplicados de insumos por si se requiere repetir la toma.'
-  }
+    recommendedFor: '.',
+    preprodTips: 'Se precisa un buen guión, con buena práctica y conocimiento preciso de las imágenes a utilizar en cada momento.'
+  },
+  {
+    id: 'pildora-croma-animaciones',
+    title: 'Desarrollo de conceptos complejos con fondo croma y animaciones',
+    category: 'Impacto Conceptual',
+    duration: '4 a 7 min',
+    complexity: 'Alta',
+    description: 'Grabación del docente en estudio con pantalla verde (croma) interactuando con gráficos animados, líneas temporales flotantes, modelos tridimensionales y conceptos dinámicos.',
+    pedagogicalRole: 'Genera alto enganche visual en temas abstractos que requieren anclajes espaciales y metáforas visuales.',
+    visualSupports: ['presentacion-diapositivas', 'visionado-videos'],
+    postProductionNeeds: ['fondo-croma', 'animaciones', 'texto-imagenes'],
+    youtubeId: 'vFlD5fEYVFg',
+    recommendedFor: 'Medicina, Biología Celular, Geología, Física Teórica, Módulos introductorios masivos.',
+    preprodTips: 'Formato reservado para situaciones especiales. Requiere alto trabajo de pre y postproducción.'
+  },
 ];
 
 // App State
@@ -578,7 +607,7 @@ function selectFormatForProduction(id: string) {
     }
   }
 
-  showToast(`Formato "${item?.title || ''}" precargado en la solicitud.`);
+  showToast(`Formato "${item?.title || ''}" precargado en el formulario de solicitud.`);
 }
 (window as unknown as { selectFormatForProduction: (id: string) => void }).selectFormatForProduction = selectFormatForProduction;
 
@@ -631,7 +660,7 @@ function initChecklist() {
       const checkboxes = container?.querySelectorAll<HTMLInputElement>('input[type="checkbox"]');
       checkboxes?.forEach(cb => { cb.checked = false; });
       updateProgress();
-      showToast('Lista de cotejo restablecida.');
+      showToast('Lista restablecida.');
     });
   }
 
@@ -1532,15 +1561,15 @@ ${selectedPost.length > 0 ? selectedPost.map(p => `  • ${p}`).join('\n') : '  
   ${notas || 'Sin observaciones adicionales'}
 
 ==================================================
-Centro de Producción Audiovisual Educativa
-Portal Docente de Preproducción`;
+Equipo de Producción Audiovisual
+FyPE - FCE`;
 
       if (confCodeEl) confCodeEl.textContent = requestCode;
       if (confSummaryEl) confSummaryEl.textContent = lastSubmissionText;
 
       if (confSheetsMsg) {
         if (confSheetsIcon) confSheetsIcon.textContent = '✅';
-        if (confSheetsTitle) confSheetsTitle.textContent = '¡Solicitud Registrada y Notificada!';
+        if (confSheetsTitle) confSheetsTitle.textContent = '¡Solicitud registrada y notificada!';
         confSheetsMsg.textContent = 'La solicitud ha quedado registrada correctamente en el sistema y se envió el aviso al equipo de producción.';
       }
 
