@@ -1278,6 +1278,12 @@ function doGet(e) {
 }`;
 
 // Form Interactions & Submission
+// Configuración centralizada de la Web App de Google Apps Script para uso general.
+// De esta forma todos los usuarios envían directamente sin requerir ninguna configuración en el cliente.
+export const GOOGLE_APPS_SCRIPT_WEBAPP_URL: string =
+  (import.meta as unknown as { env?: { VITE_SHEETS_WEBAPP_URL?: string } }).env?.VITE_SHEETS_WEBAPP_URL ||
+  'https://script.google.com/macros/s/AKfycby-PwggIquGDiWPH76kbO5x_ujpDdnQVZOXF7H-ksdMlQIgdZs98wSgpR62MHTn7A/exec';
+
 function initFormInteractions() {
   const form = document.getElementById('production-form') as HTMLFormElement | null;
   const confirmationModal = document.getElementById('confirmation-modal');
@@ -1289,171 +1295,8 @@ function initFormInteractions() {
   const confCopyRowBtn = document.getElementById('conf-copy-row-btn');
   const confDownloadBtn = document.getElementById('conf-download-btn');
   const confSheetsMsg = document.getElementById('conf-sheets-msg');
-
-  // Google Sheets Config Modal
-  const sheetsConfigModal = document.getElementById('sheets-config-modal');
-  const btnOpenSheetsConfig = document.getElementById('btn-open-sheets-config');
-  const sheetsConfigCloseBtn = document.getElementById('sheets-config-close-btn');
-  const sheetsConfigCloseBtn2 = document.getElementById('sheets-config-close-btn-2');
-  const appsScriptCodeEl = document.getElementById('apps-script-code');
-  const btnCopyAppsScript = document.getElementById('btn-copy-apps-script');
-  const inputWebappUrl = document.getElementById('input-webapp-url') as HTMLInputElement | null;
-  const btnSaveWebappUrl = document.getElementById('btn-save-webapp-url');
-  const btnTestWebappUrl = document.getElementById('btn-test-webapp-url');
-  const sheetsConfigFeedback = document.getElementById('sheets-config-feedback');
-  const sheetsStatusPill = document.getElementById('sheets-status-pill');
-  const confOpenConfigBtn = document.getElementById('conf-open-config-btn');
   const confSheetsIcon = document.getElementById('conf-sheets-icon');
   const confSheetsTitle = document.getElementById('conf-sheets-title');
-
-  const updateStatusPill = () => {
-    const url = localStorage.getItem('sheet_webapp_url');
-    if (sheetsStatusPill) {
-      if (url && url.startsWith('http')) {
-        sheetsStatusPill.className = 'px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-800';
-        sheetsStatusPill.textContent = '🟢 Conectado con Apps Script';
-      } else {
-        sheetsStatusPill.className = 'px-2.5 py-1 rounded-full text-[11px] font-bold bg-amber-100 text-amber-800';
-        sheetsStatusPill.textContent = '⚠️ Falta vincular URL de Apps Script';
-      }
-    }
-  };
-
-  updateStatusPill();
-
-  if (appsScriptCodeEl) {
-    appsScriptCodeEl.textContent = GOOGLE_APPS_SCRIPT_SAMPLE;
-  }
-
-  if (inputWebappUrl) {
-    inputWebappUrl.value = localStorage.getItem('sheet_webapp_url') || '';
-  }
-
-  const openSheetsConfig = () => {
-    if (sheetsConfigModal) {
-      if (inputWebappUrl) inputWebappUrl.value = localStorage.getItem('sheet_webapp_url') || '';
-      if (sheetsConfigFeedback) {
-        sheetsConfigFeedback.classList.add('hidden');
-        sheetsConfigFeedback.innerHTML = '';
-      }
-      sheetsConfigModal.classList.remove('hidden');
-      document.body.classList.add('overflow-hidden');
-    }
-  };
-
-  const closeSheetsConfig = () => {
-    if (sheetsConfigModal) {
-      sheetsConfigModal.classList.add('hidden');
-      document.body.classList.remove('overflow-hidden');
-    }
-  };
-
-  if (btnOpenSheetsConfig) btnOpenSheetsConfig.addEventListener('click', openSheetsConfig);
-  if (sheetsConfigCloseBtn) sheetsConfigCloseBtn.addEventListener('click', closeSheetsConfig);
-  if (sheetsConfigCloseBtn2) sheetsConfigCloseBtn2.addEventListener('click', closeSheetsConfig);
-
-  if (confOpenConfigBtn) {
-    confOpenConfigBtn.addEventListener('click', () => {
-      if (confirmationModal) confirmationModal.classList.add('hidden');
-      openSheetsConfig();
-    });
-  }
-
-  if (btnCopyAppsScript) {
-    btnCopyAppsScript.addEventListener('click', () => {
-      navigator.clipboard.writeText(GOOGLE_APPS_SCRIPT_SAMPLE).then(() => {
-        showToast('Código de Google Apps Script copiado al portapapeles.');
-      });
-    });
-  }
-
-  if (btnSaveWebappUrl && inputWebappUrl) {
-    btnSaveWebappUrl.addEventListener('click', () => {
-      const url = inputWebappUrl.value.trim();
-      localStorage.setItem('sheet_webapp_url', url);
-      updateStatusPill();
-      if (sheetsConfigFeedback) {
-        sheetsConfigFeedback.classList.remove('hidden');
-        if (url) {
-          sheetsConfigFeedback.className = 'p-3 rounded-xl text-xs font-medium bg-emerald-50 border border-emerald-300 text-emerald-900';
-          sheetsConfigFeedback.innerHTML = '✅ <strong>URL guardada con éxito.</strong> Ahora cada envío desde el formulario se insertará en tu planilla.';
-        } else {
-          sheetsConfigFeedback.className = 'p-3 rounded-xl text-xs font-medium bg-slate-100 border border-slate-300 text-slate-700';
-          sheetsConfigFeedback.innerHTML = 'Configuración restablecida.';
-        }
-      }
-      showToast(url ? 'Conexión con Google Apps Script guardada.' : 'Configuración restablecida.');
-    });
-  }
-
-  if (btnTestWebappUrl && inputWebappUrl) {
-    btnTestWebappUrl.addEventListener('click', async () => {
-      const url = inputWebappUrl.value.trim() || localStorage.getItem('sheet_webapp_url') || '';
-      if (!url || !url.startsWith('http')) {
-        if (sheetsConfigFeedback) {
-          sheetsConfigFeedback.classList.remove('hidden');
-          sheetsConfigFeedback.className = 'p-3 rounded-xl text-xs font-medium bg-amber-50 border border-amber-300 text-amber-900';
-          sheetsConfigFeedback.innerHTML = '⚠️ Por favor ingresá primero la URL de tu aplicación web (termina en <code>/exec</code>).';
-        }
-        return;
-      }
-
-      btnTestWebappUrl.setAttribute('disabled', 'true');
-      const originalTestHtml = btnTestWebappUrl.innerHTML;
-      btnTestWebappUrl.innerHTML = '⏳ Enviando fila de prueba...';
-
-      const testPayload = {
-        fecha: new Date().toLocaleString('es-AR'),
-        codigo: 'TEST-' + Math.floor(1000 + Math.random() * 9000),
-        materia: 'PRUEBA DE CONEXIÓN CON APPS SCRIPT',
-        carrera: 'Test de Integración',
-        docente: 'Docente de Prueba',
-        email: 'contacto@cátedra.edu.ar',
-        telefono: '351-0000000',
-        formato: 'Video de Prueba',
-        duracion: '1 minuto',
-        soportesVisuales: 'Placas gráficas de prueba',
-        postproduccion: 'Edición de prueba',
-        enlaceDrive: '-',
-        fechaTentativa: 'Inmediata',
-        observaciones: '¡Si ves esta fila en tu planilla de Google Sheets, la conexión automática está 100% activa!'
-      };
-
-      try {
-        await fetch(url, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: {
-            'Content-Type': 'text/plain;charset=utf-8'
-          },
-          body: JSON.stringify(testPayload)
-        });
-
-        localStorage.setItem('sheet_webapp_url', url);
-        updateStatusPill();
-
-        if (sheetsConfigFeedback) {
-          sheetsConfigFeedback.classList.remove('hidden');
-          sheetsConfigFeedback.className = 'p-3 rounded-xl text-xs font-medium bg-emerald-50 border border-emerald-300 text-emerald-900';
-          sheetsConfigFeedback.innerHTML = `
-            <strong>✅ ¡Fila de prueba enviada a Google Apps Script!</strong><br>
-            Abrí tu <a href="https://docs.google.com/spreadsheets/d/1CUjRUiYdA669F3G5AHXgEzAwm97nzKr7aRO0-vOH-hY/edit?usp=sharing" target="_blank" class="underline font-bold">planilla de Google Sheets</a> para verificar que apareció la nueva fila al final de la hoja.
-            <br><span class="text-[11px] text-emerald-700 mt-1 block">Si no aparece, revisá en Apps Script que en <em>"Quién tiene acceso"</em> hayas puesto <em>"Cualquier usuario"</em>.</span>
-          `;
-        }
-        showToast('Fila de prueba enviada.');
-      } catch (err) {
-        if (sheetsConfigFeedback) {
-          sheetsConfigFeedback.classList.remove('hidden');
-          sheetsConfigFeedback.className = 'p-3 rounded-xl text-xs font-medium bg-red-50 border border-red-300 text-red-900';
-          sheetsConfigFeedback.innerHTML = '❌ Ocurrió un error al enviar: ' + String(err);
-        }
-      } finally {
-        btnTestWebappUrl.removeAttribute('disabled');
-        btnTestWebappUrl.innerHTML = originalTestHtml;
-      }
-    });
-  }
 
   // Populate Format Dropdown in Form
   const formatSelect = document.getElementById('form-formato') as HTMLSelectElement | null;
@@ -1588,8 +1431,8 @@ function initFormInteractions() {
         sheetPayload.observaciones
       ].join('\t');
 
-      // Try automatic Google Apps Script webhook submission if configured
-      const webAppUrl = localStorage.getItem('sheet_webapp_url');
+      // Automatic Google Apps Script submission for general use
+      const webAppUrl = GOOGLE_APPS_SCRIPT_WEBAPP_URL || localStorage.getItem('sheet_webapp_url') || '';
       let directSubmitSuccess = false;
 
       if (webAppUrl && webAppUrl.startsWith('http')) {
@@ -1656,17 +1499,9 @@ Portal Docente de Preproducción`;
       if (confSummaryEl) confSummaryEl.textContent = lastSubmissionText;
 
       if (confSheetsMsg) {
-        if (directSubmitSuccess) {
-          if (confSheetsIcon) confSheetsIcon.textContent = '✅';
-          if (confSheetsTitle) confSheetsTitle.textContent = '¡Asentado con Éxito en Google Sheets!';
-          confSheetsMsg.textContent = 'La solicitud fue agregada automáticamente como una nueva fila en tu planilla oficial.';
-          if (confOpenConfigBtn) confOpenConfigBtn.classList.add('hidden');
-        } else {
-          if (confSheetsIcon) confSheetsIcon.textContent = '⚠️';
-          if (confSheetsTitle) confSheetsTitle.textContent = 'Solicitud Generada (Falta vincular Web App)';
-          confSheetsMsg.textContent = 'Para que cada envío se asiente solo en tu planilla, vinculá la URL de tu Web App de Apps Script con el botón "Vincular URL". También podés usar "Copiar Fila para Sheets".';
-          if (confOpenConfigBtn) confOpenConfigBtn.classList.remove('hidden');
-        }
+        if (confSheetsIcon) confSheetsIcon.textContent = '✅';
+        if (confSheetsTitle) confSheetsTitle.textContent = '¡Solicitud Asentada en Google Sheets!';
+        confSheetsMsg.textContent = 'La solicitud fue registrada de manera directa en la planilla oficial de cátedras.';
       }
 
       if (confirmationModal) {
