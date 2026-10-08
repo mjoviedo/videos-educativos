@@ -720,45 +720,31 @@
           <!-- Form Card -->
           <div id="production-form-card" class="bg-white rounded-3xl border border-slate-300 shadow-xl p-6 sm:p-10 transition-all">
             
-            <!-- Google Sheets Integration Banner 
-            <div class="mb-8 p-4.5 rounded-2xl bg-emerald-50/90 border border-emerald-200 text-slate-800 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 shadow-xs">
-              <div class="flex items-start sm:items-center gap-3">
-                <div class="w-11 h-11 rounded-2xl bg-emerald-600 text-white flex items-center justify-center shrink-0 text-xl font-bold shadow-xs">
-                  📊
-                </div>
+            <!-- Google Sheets Connection Status Bar -->
+            <div class="mb-6 p-3 sm:p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
+              <div class="flex items-center gap-2.5">
+                <span class="text-lg">📊</span>
                 <div>
-                  <div class="flex flex-wrap items-center gap-2">
-                    <span class="text-xs font-bold text-emerald-950 uppercase tracking-wider">Planilla de destino vinculada</span>
-                    <span class="px-2 py-0.5 rounded text-[10px] font-extrabold bg-emerald-200 text-emerald-900 uppercase tracking-wider">
-                      Google Sheets
-                    </span>
-                  </div>
-                  <p class="text-xs text-emerald-800 mt-0.5 leading-relaxed">
-                    Las respuestas enviadas desde este formulario quedan asentadas en la planilla de cátedra designada.
-                  </p>
+                  <span class="font-bold text-slate-800">Planilla de destino:</span>
+                  <a href="https://docs.google.com/spreadsheets/d/1CUjRUiYdA669F3G5AHXgEzAwm97nzKr7aRO0-vOH-hY/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="text-emerald-700 font-semibold underline hover:text-emerald-800 ml-1">
+                    Google Sheets oficial ↗
+                  </a>
                 </div>
               </div>
-              <div class="flex flex-wrap items-center gap-2 w-full md:w-auto justify-end">
-                <a 
-                  href="https://docs.google.com/spreadsheets/d/1CUjRUiYdA669F3G5AHXgEzAwm97nzKr7aRO0-vOH-hY/edit?usp=sharing" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold transition-all shadow-xs"
-                >
-                  <span>Abrir planilla</span>
-                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-                </a>
+              <div class="flex items-center gap-2 self-end sm:self-auto">
+                <span id="sheets-status-pill" class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-amber-100 text-amber-800">
+                  ⚠️ Falta vincular URL de Apps Script
+                </span>
                 <button 
                   type="button" 
                   id="btn-open-sheets-config"
-                  class="inline-flex items-center gap-1.5 px-3 py-2 rounded-xl border border-emerald-300 bg-white hover:bg-emerald-100/70 text-emerald-900 text-xs font-semibold transition-all cursor-pointer"
-                  title="Configuración de Apps Script / Webhook para envío automático"
+                  class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-300 hover:border-emerald-600 bg-white hover:bg-emerald-50 text-slate-700 hover:text-emerald-900 font-bold transition-all cursor-pointer shadow-2xs"
+                  title="Configurar o cambiar la URL de Apps Script para el guardado automático"
                 >
-                  <span>⚙️ Configurar envío directo</span>
+                  <span>⚙️ Vincular / Instrucciones</span>
                 </button>
               </div>
             </div>
-            -->
 
             <form id="production-form" class="space-y-8">
               
@@ -1099,23 +1085,32 @@
         <!-- Google Sheets Direct Registration Notification -->
         <div id="conf-sheets-status" class="mb-4 p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-xs">
           <div class="flex items-center gap-2.5">
-            <span class="text-lg">📊</span>
+            <span id="conf-sheets-icon" class="text-lg">📊</span>
             <div>
-              <span class="font-bold text-emerald-950 block">Registro para Planilla de Google Sheets</span>
+              <span id="conf-sheets-title" class="font-bold text-emerald-950 block">Registro para Planilla de Google Sheets</span>
               <span id="conf-sheets-msg" class="text-emerald-800 text-[11px]">
                 Solicitud vinculada a la planilla oficial de cátedra.
               </span>
             </div>
           </div>
-          <a 
-            href="https://docs.google.com/spreadsheets/d/1CUjRUiYdA669F3G5AHXgEzAwm97nzKr7aRO0-vOH-hY/edit?usp=sharing" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs transition-colors shrink-0 shadow-xs"
-          >
-            <span>Ver en Google Sheets</span>
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
-          </a>
+          <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
+            <button 
+              id="conf-open-config-btn" 
+              type="button" 
+              class="hidden inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-amber-300 bg-amber-50 hover:bg-amber-100 text-amber-900 font-bold text-xs transition-colors cursor-pointer"
+            >
+              <span>⚙️ Vincular URL</span>
+            </button>
+            <a 
+              href="https://docs.google.com/spreadsheets/d/1CUjRUiYdA669F3G5AHXgEzAwm97nzKr7aRO0-vOH-hY/edit?usp=sharing" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs transition-colors shrink-0 shadow-xs"
+            >
+              <span>Ver en Google Sheets</span>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+            </a>
+          </div>
         </div>
 
         <pre id="conf-summary" class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-slate-800 text-xs font-mono whitespace-pre-wrap max-h-56 overflow-y-auto mb-5"></pre>
@@ -1171,7 +1166,7 @@
             <ol class="list-decimal list-inside space-y-1.5 text-slate-600">
               <li>Abrí tu <a href="https://docs.google.com/spreadsheets/d/1CUjRUiYdA669F3G5AHXgEzAwm97nzKr7aRO0-vOH-hY/edit?usp=sharing" target="_blank" class="text-emerald-700 font-semibold underline">Planilla de Google Sheets</a>.</li>
               <li>En el menú superior hacé clic en <strong>Extensiones &gt; Apps Script</strong>.</li>
-              <li>Borrá lo que haya y pegá el siguiente código script:</li>
+              <li>Borrá todo lo que haya y pegá el siguiente código script:</li>
             </ol>
             
             <div class="relative">
@@ -1179,42 +1174,61 @@
               <button 
                 id="btn-copy-apps-script" 
                 type="button" 
-                class="absolute top-2 right-2 px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-white text-[11px] font-bold border border-slate-700 cursor-pointer"
+                class="absolute top-2 right-2 px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-white text-[11px] font-bold border border-slate-700 cursor-pointer shadow-xs"
               >
                 Copiar código
               </button>
             </div>
 
             <ol start="4" class="list-decimal list-inside space-y-1.5 text-slate-600 pt-1">
-              <li>Hacé clic en el botón azul <strong>Implementar &gt; Nueva implementación</strong>.</li>
-              <li>Elegí tipo: <strong>Aplicación web</strong>. En <em>"Quién tiene acceso"</em> seleccioná <strong>Cualquier usuario</strong> (Anyone).</li>
-              <li>Copiá la <strong>URL de la aplicación web</strong> que te da Google y pegala abajo:</li>
+              <li>Hacé clic en el botón azul <strong>Implementar &gt; Nueva implementación</strong> (Deploy &gt; New deployment).</li>
+              <li>En el engranaje ⚙️ seleccioná tipo: <strong>Aplicación web</strong> (Web app).</li>
+              <li>En <em>"Ejecutar como"</em> dejá <strong>Yo (tu cuenta)</strong>.</li>
+            </ol>
+
+            <!-- Alerta Clave de Permiso -->
+            <div class="p-3 rounded-xl bg-amber-50 border border-amber-300 text-amber-950 font-medium text-[11px] leading-relaxed">
+              <span class="font-extrabold text-amber-900 block mb-0.5">⚠️ REQUISITO FUNDAMENTAL:</span>
+              En el campo <strong>"Quién tiene acceso"</strong> (Who has access) seleccioná obligatoriamente <strong>"Cualquier usuario" (Anyone)</strong>.<br>
+              <em>Si queda en "Solo yo" o restringido a usuarios de tu dominio, Google rechazará las respuestas enviadas desde la web y no se guardarán en la planilla.</em>
+            </div>
+
+            <ol start="7" class="list-decimal list-inside space-y-1.5 text-slate-600 pt-1">
+              <li>Hacé clic en <strong>Implementar</strong>, autorizá los permisos si te lo solicita y copiá la <strong>URL de la aplicación web</strong> generada (termina en <code>/exec</code>).</li>
+              <li>Pegá esa URL en el campo de abajo y hacé clic en <strong>Guardar y Probar</strong>:</li>
             </ol>
           </div>
 
           <div>
             <label for="input-webapp-url" class="block font-bold text-slate-800 uppercase tracking-wider mb-1 text-[11px]">
-              URL de la Aplicación Web (Apps Script / Webhook):
+              URL de la Aplicación Web de Google Apps Script:
             </label>
             <input 
               type="url" 
               id="input-webapp-url" 
-              placeholder="https://script.google.com/macros/s/.../exec"
+              placeholder="https://script.google.com/macros/s/AKfycb.../exec"
               class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-xs font-mono focus:border-emerald-600 focus:outline-none focus:ring-2 focus:ring-emerald-600/20"
             />
-            <span class="text-[11px] text-slate-400 mt-1 block">
-              Al guardar, todos los envíos desde esta web se insertarán en tu planilla automáticamente.
+            <span class="text-[11px] text-slate-500 mt-1 block">
+              La URL debe iniciar con <code>https://script.google.com/macros/s/</code> y finalizar con <code>/exec</code>.
             </span>
           </div>
+
+          <div id="sheets-config-feedback" class="hidden p-3 rounded-xl text-xs font-medium"></div>
         </div>
 
-        <div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+        <div class="pt-4 mt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
           <button id="sheets-config-close-btn-2" type="button" class="px-4 py-2 rounded-xl text-slate-600 hover:bg-slate-100 text-xs font-semibold cursor-pointer">
-            Cancelar
+            Cerrar
           </button>
-          <button id="btn-save-webapp-url" type="button" class="px-5 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs shadow-xs cursor-pointer">
-            Guardar Conexión
-          </button>
+          <div class="flex items-center gap-2">
+            <button id="btn-test-webapp-url" type="button" class="px-3.5 py-2.5 rounded-xl border border-emerald-300 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 font-bold text-xs transition-all cursor-pointer">
+              🧪 Enviar Fila de Prueba
+            </button>
+            <button id="btn-save-webapp-url" type="button" class="px-5 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs shadow-xs cursor-pointer">
+              Guardar Conexión
+            </button>
+          </div>
         </div>
       </div>
     </div>
